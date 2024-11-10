@@ -1,0 +1,73 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+.header {
+  position: sticky;
+
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  border: 2px solid;
+  text-align: center;
+  cursor: pointer;
+}
+.postsItem {
+  text-align: center;
+  top:0;
+}
+
+.list {
+  border: 1px solid turquoise;
+  margin: 10px;
+  padding: 5px;
+  
+}
+.Clock {
+  border: 0.5px solid yellowgreen;
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  float: left;
+}
+.inputItem {
+  text-align: center;
+}
+.sort {
+  justify-content: center;
+}
+.apiQuery {
+  
+  text-align: center;
+  justify-content: center;
+}
+.postsFormJson {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.dataJson {
+  border: 1px solid;
+  margin-top: 5px;
+}
+.first-letter {
+  color: #f44336;
+  font-size: 2em;
+  line-height: 1;
+}
+.commentsList {
+  display: flex;
+  
+}
+.comments{
+justify-content: center;
+}
+.FormApp{
+  display: flex;
+  justify-content: center;
+}

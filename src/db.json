@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "id": "3fde",
+      "title": "sdadsad"
+    },
+    {
+      "id": "5eb6",
+      "title": "sadadds"
+    },
+    {
+      "id": "d93e",
+      "title": "wefeefwew"
+    }
+  ],
+  "comments": [
+    {
+      "id": "80a9",
+      "text": "WDA"
+    },
+    {
+      "id": "5121",
+      "text": "addsad"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
