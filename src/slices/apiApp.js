@@ -46,8 +46,8 @@ export const apiApp = createApi({
         invalidatesTags:['Posts']
       }),
       removeAllPosts: builder.mutation({
-        query:(data) => ({
-          url:`/posts${data}`,
+        query: () => ({
+          url:`/posts`,
           method: 'DELETE',
         }),
         invalidatesTags:['Posts']

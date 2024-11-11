@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-
+import { useNavigate, useParams } from 'react-router-dom';
 const CommentsAddThings = () => {
 
         const [comments, setComments] = useState([])
         const [text, setText] = useState('');
 
+        const route = useNavigate();
+        const params = useParams()
         const handleAddComThings = (e) => {
             e.preventDefault()
             if(text) {
@@ -18,6 +20,9 @@ const CommentsAddThings = () => {
             }
   return (
     <div>
+      <div style={{display:'flex', justifyContent:'center'}}>
+       <h1>Комментарий под id  {params.id}</h1>
+      </div>
       <h1>добавить комментарий</h1>
       <form>
         <input
@@ -35,6 +40,8 @@ const CommentsAddThings = () => {
             </li>
         ))}
         </ol>
+        <button onClick={() => setComments([])}>Удалить всё</button>
+        <button onClick={()=>route("/commentsList")}>Вернуться назад</button>
     </div>
   )
 }

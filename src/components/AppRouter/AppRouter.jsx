@@ -10,6 +10,7 @@ import ErrorPath from "../Pages/ErrorPath";
 import UserContext from "../Context/context";
 import cl from "./route.module.css"
 import CommentsAddThings from "../comments/CommentsAddThings";
+import UserAdress from "../UserAdress";
 const AppRouter = () => {
   /*
       route работает так: в ссылке в верху страницы через слеш плюс название то есть path 
@@ -29,6 +30,7 @@ const AppRouter = () => {
 
   return authorization ? (
     <Routes>
+      <Route path ="/userAdress/:id" element ={<UserAdress/>}/>
       <Route path = "/ComAddThings/:id" element={<CommentsAddThings/>}/>
       <Route path="/header" element={<Header />} />
       <Route path="postsComment/:id" element={<PostsComment />} />

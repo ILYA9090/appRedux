@@ -7,7 +7,7 @@ const MyButtonDeletePosts = () => {
   const HandleRemoveAllPoSTS = async () => await removeAll();
 
   return (
-    <button onClick={(data) => HandleRemoveAllPoSTS()}>
+    <button onClick={HandleRemoveAllPoSTS}>
       удалить все посты!
     </button>
   );

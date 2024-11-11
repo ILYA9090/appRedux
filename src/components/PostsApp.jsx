@@ -8,12 +8,15 @@ import MyDescription from "./MyDescription";
 import Modal from "./comments/Modal";
 import Posts from "./Posts";
 import Clock from "./Clock";
-const PostsApp = ({children}) => {
+const PostsApp = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
+
+
+  
 
   // создаю функцию, которая добовляет в начальное состояние из слайса обьект с полями text(из хука useState) и id
   const handleSubmit = (e) => {
@@ -61,7 +64,6 @@ const PostsApp = ({children}) => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="введите почту"
         />
-
         <button type="submit" value="Add">
           add
         </button>

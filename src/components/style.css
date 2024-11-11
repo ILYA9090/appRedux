@@ -24,7 +24,7 @@ img {
 .list {
   border: 1px solid turquoise;
   margin: 10px;
-  padding: 5px;
+  padding-left: 5px;
   
 }
 .Clock {
@@ -70,4 +70,7 @@ justify-content: center;
 .FormApp{
   display: flex;
   justify-content: center;
+}
+span {
+  margin-left: 5px;
 }

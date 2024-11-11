@@ -6,7 +6,7 @@ const CommentsMap = () => {
   const { data = [] } = useGetCommentsQuery();
   const [remove] = useDeleteCommentsMutation();
 
-  const route = useNavigate()
+  const route = useNavigate();
   const handleDeleteCom = async (id) => {
     return await remove(id);
   };
@@ -19,9 +19,12 @@ const CommentsMap = () => {
             <li className="comments" key={com.id}>
               <p>{com.text}</p>
               <button onClick={() => handleDeleteCom(com.id)}>delete</button>
-              <button onClick={() => route(`/ComAddThings/${com.id}`)}>добавить что то</button>
+              <button onClick={() => route(`/ComAddThings/${com.id}`)}>
+                добавить что то
+              </button>
             </li>
           ))}
+           <button>удалить всё</button>
         </div>
       </ol>
     </div>

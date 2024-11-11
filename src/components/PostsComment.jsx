@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React from "react";
 import { useState } from "react";
 const PostsComment = () => {
   const [comments, setComment] = useState([]);
   const [text, setText] = useState("");
-
+  const route = useNavigate()
   const params = useParams();
   console.log(params);
   const handleAddComment = (e) => {
@@ -45,6 +45,7 @@ const PostsComment = () => {
         </ul>
       </div>
       <button onClick={() => setComment([])}>удалить все комментарии</button>
+      <button onClick={() => route("/postsJson")}>Вернуться назад!</button>
     </div>
   );
 };

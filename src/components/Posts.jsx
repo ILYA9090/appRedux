@@ -1,25 +1,31 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectors, deleteUser, removePost, fetchUsers, reset, addTasks } from "../slices/tasksSlice";
+import {
+  selectors,
+  deleteUser,
+  removePost,
+  fetchUsers,
+  reset,
+  addTasks,
+} from "../slices/tasksSlice";
 import { useDispatch } from "react-redux";
 import "./style.css";
 import SortPosts from "./SortPosts";
 import MyInput from "./MyInput";
 import { useNavigate } from "react-router-dom";
 
-
 // этот компонент маппит (отображет) текущее состояние, которое я изменяю с попомщью диспатча в компоненте PostApp
-const Posts = ({children}) => {
+const Posts = ({ children }) => {
   const [checkbox, setCheckbox] = useState(false);
-  
-  const [query, setQuery] = useState('')
+
+  const [query, setQuery] = useState("");
   const dispatch = useDispatch();
 
   const posts = useSelector(selectors.selectAll);
 
   const changeCheckbox = () => setCheckbox(!checkbox);
-  const router = useNavigate()
+  const router = useNavigate();
   /*useEffect(() => {
   const requestData = async () => {
     const responce = await axios.get(
@@ -59,9 +65,7 @@ const Posts = ({children}) => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-
-
-    /* Не работает
+  /* Не работает
   const sortUsers = (sort) => {
     setSelectedSort(sort)
     dispatch(addTasks(([...posts].sort((a,b) => a[sort].localeCompare(b[sort])))))
@@ -70,17 +74,15 @@ const Posts = ({children}) => {
   }
 */
 
-  
   return (
     <div className="postsItem">
-      <MyInput 
-      value={query}
-      onChange={(e)=> setQuery(e.target.value)}
-      placeholder='Поиск'
+      <MyInput
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Поиск"
       />
-      
+
       <SortPosts
-        
         posts={posts}
         defaultValue="по умолчанию"
         options={[
@@ -95,21 +97,27 @@ const Posts = ({children}) => {
           {posts.map((post) => (
             <div className="list">
               <li key={post.id}>
-                <input id ='check' type="checkbox" onClick={() => changeCheckbox()}></input>
-                <label for='check'></label>
+                <input
+                  id="check"
+                  type="checkbox"
+                  onClick={() => changeCheckbox()}
+                />
+
+                <label for="check"></label>
                 <span>{post.name}</span>
                 <span>{post.username}</span>
                 <span>{post.email}</span>
-                <button onClick={() => router(`/postsApp/${post.id}`)}>
+                <span>{post.address.city}</span>
+
+                <button onClick={() => router(`/userAdress/${post.id}`)}>
                   отркыть пользователя
                 </button>
                 <button
                   id="b"
                   type="button"
                   onClick={() => dispatch(deleteUser(post.id))}
-                >
-                  delete
-                </button>
+                  
+                >delete</button>
               </li>
             </div>
           ))}
@@ -117,7 +125,6 @@ const Posts = ({children}) => {
       )}
       <button onClick={() => dispatch(reset())}>удалить всё</button>
       <hr />
-      
     </div>
   );
 };
