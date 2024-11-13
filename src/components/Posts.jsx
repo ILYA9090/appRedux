@@ -74,6 +74,7 @@ const Posts = ({ children }) => {
   }
 */
 
+  // не получается добавить и выводить вложенный обьект
   return (
     <div className="postsItem">
       <MyInput
@@ -107,8 +108,6 @@ const Posts = ({ children }) => {
                 <span>{post.name}</span>
                 <span>{post.username}</span>
                 <span>{post.email}</span>
-                <span>{post.address.city}</span>
-
                 <button onClick={() => router(`/userAdress/${post.id}`)}>
                   отркыть пользователя
                 </button>
@@ -116,8 +115,9 @@ const Posts = ({ children }) => {
                   id="b"
                   type="button"
                   onClick={() => dispatch(deleteUser(post.id))}
-                  
-                >delete</button>
+                >
+                  delete
+                </button>
               </li>
             </div>
           ))}

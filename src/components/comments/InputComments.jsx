@@ -3,14 +3,14 @@ import Modal from "./Modal";
 import { useAddCommentsMutation } from "../../slices/apiApp";
 import "./commentsStyle.css";
 const InputComments = () => {
-  const [userText, setUserText] = useState("");
+  const [text, setText] = useState("");
   const [addPosts] = useAddCommentsMutation();
   const [modal, setModal] = useState(false);
   const handleSumbitForm = async (e) => {
     e.preventDefault();
-    if (userText.trim().length) {
-      await addPosts({ text: userText });
-      setUserText("");
+    if (text.trim().length) {
+      await addPosts({text});
+      setText("");
       setModal(false);
     }
   };
@@ -28,8 +28,8 @@ const InputComments = () => {
           <form type="form" onSubmit={handleSumbitForm}>
             <input
               type="text"
-              value={userText}
-              onChange={(e) => setUserText(e.target.value)}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
             />
             <button type="submit">Add</button>
           </form>

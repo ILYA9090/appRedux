@@ -21,9 +21,13 @@ const PostsApp = () => {
   // создаю функцию, которая добовляет в начальное состояние из слайса обьект с полями text(из хука useState) и id
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = { name, username, email, id: Math.random() };
+    // не получается добавить и выводить вложенный обьект
+    const userData = { name, username, email,  id: Math.random() };
+    
+    
+    const userDa = userData
     if ((name && username).trim().length) {
-      dispatch(addUsersAx({ userData }));
+      dispatch(addUsersAx({ userDa}));
     }
     setName("");
     setUsername("");
@@ -35,8 +39,10 @@ const PostsApp = () => {
   // сначала изменение отлавливаются в инпуте, изменяя состояние потом этот text уже в Task из функции Handle
   return (
     <div>
+    
       <Clock/>
         <MyDescription/>
+        
         <div style={{display:"flex", justifyContent:"center", margin:'30px'}}>
         <button onClick={() => setModal(true)}>Добавить пользователя</button>
         </div>
