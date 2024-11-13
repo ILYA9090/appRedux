@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+что бы запустить проект, клонируйте его на свой компьютер, затем с помощью команды ls найдите app-redux, cd app=redux, cr src, выполните команду make start,
+затем зайдиет через vs code и в корне проекта выполните команду npm start
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
