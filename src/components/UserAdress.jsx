@@ -21,8 +21,9 @@ const UserAdress = () => {
           <span> у пользователя с id = {params.id} нету адреса </span>
         )
       )}
-
+<div>
       <button onClick={() => route("/postsApp")}>вернуться назад</button>
+      </div>
     </div>
   );
 }

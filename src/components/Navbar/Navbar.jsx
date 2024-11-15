@@ -13,6 +13,7 @@ const Navbar = () => {
     <div className={cl.navbar}>
         <div className={cl.navbar__Links}>
           <button onClick={()=>setAuthorization(false)}>выйти</button>
+          <Link to="/albumsList">album </Link>
           <Link to="/header">header </Link>
           <Link to="/postsApp">postsApp </Link>
           <Link to="/postsJson">postsJson </Link>

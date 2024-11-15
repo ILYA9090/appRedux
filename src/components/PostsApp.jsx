@@ -23,11 +23,8 @@ const PostsApp = () => {
     e.preventDefault();
     // не получается добавить и выводить вложенный обьект
     const userData = { name, username, email,  id: Math.random() };
-    
-    
-    const userDa = userData
     if ((name && username).trim().length) {
-      dispatch(addUsersAx({ userDa}));
+      dispatch(addUsersAx({userData}));
     }
     setName("");
     setUsername("");

@@ -13,7 +13,7 @@ import Clock from "./Clock";
 const PostsJson = ({ children }) => {
   const [text, setText] = useState("");
   const [modal, setModal] = useState(false);
-  const { data = [], isLoading } = useGetPostsQuery();
+  const { data = [], isLoading} = useGetPostsQuery();
   const [addPosts, {}] = useAddPostsMutation();
   const [remove, { isError }] = useRemovePostsMutation();
 

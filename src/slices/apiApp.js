@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiApp = createApi({
   reducerPath: "Api",
-  tagTypes: ['Posts', 'Comments'],
+  tagTypes: ['Posts', 'Comments', 'Albums'],
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001",
   }),
@@ -10,6 +10,10 @@ export const apiApp = createApi({
     getPosts: builder.query({
       query: () => '/posts',
       providesTags : ['Posts'],
+    }),
+    getAlbums : builder.query({
+      query:(limit='') => `/albums?${limit && `_limit=${limit}`}`,
+      providesTags: ['Albums']
     }),
     getComments: builder.query({
       query : () => '/comments',
@@ -53,7 +57,11 @@ export const apiApp = createApi({
         invalidatesTags:['Posts']
       })
   }),
+  transformResponce : responce => ({
+    
+    totalPages: responce.totalPages,
+  })
 });
 
-export const { useDeleteCommentsMutation, useGetPostsQuery, useAddPostsMutation, useRemovePostsMutation, useRemoveAllPostsMutation, useGetCommentsQuery, useAddCommentsMutation} =
+export const { useDeleteCommentsMutation, useGetPostsQuery, useAddPostsMutation, useRemovePostsMutation, useRemoveAllPostsMutation, useGetCommentsQuery, useAddCommentsMutation, useGetAlbumsQuery} =
   apiApp;
