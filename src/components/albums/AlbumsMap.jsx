@@ -4,24 +4,56 @@ import { useState } from "react";
 
 const AlbumsMap = () => {
   const [count, setCount] = useState("");
+  const [countValue, setCountValue] = useState("");
+  const [sorted, setSorted] = useState('title')
   const { data = [] } = useGetAlbumsQuery(count);
-// реализовать сортировку по title и по body, важно делать сортировку именно копируя массив через оператор spred ... 
+  // реализовать сортировку по title и по body, важно делать сортировку именно копируя массив через оператор spred ...
+  // [...data].sort((a,b)=> a.title.localeCompare(b.title))
+
+  /*<ol style={{ marginTop: "50px" }}>
+{[...data].sort((a,b)=> a.title.localeCompare(b.title)).map((alb) => (
+  <li style={{ marginTop: "20px" }} key={alb.id}>
+    {alb.title}
+  </li>
+))}
+</ol>
+*/
+
+
+
+
+const handleSelect = (e) => {
+  setCount(e.target.value)
+  setCountValue('')
+}
+const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])) //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
   return (
+    
     <div>
+      <span style={{margin:'10px'}}>add and select</span>
+      <input value={countValue} onChange={(e)=>setCountValue(e.target.value)} placeholder="50max"/>
       <div>
-        <select value={count} onChange={(e) => setCount(e.target.value)}>
+        <select value={count} onChange={handleSelect}>
+        
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
+          <option value={countValue}>{countValue}</option>
         </select>
-       
+        <select value={sorted} onChange={(e) => setSorted(e.target.value)}>
+          <option value='title'>по title</option>
+          <option value='body'>по body</option>
+          <option value='id'>по id</option>
+        </select>
       </div>
+
       <ol style={{ marginTop: "50px" }}>
-        {[...data].sort((a,b)=> a.title.localeCompare(b.title)).map((alb) => (
-          <li style={{ marginTop: "20px" }} key={alb.id}>
-            {alb.title}
-          </li>
-        ))}
+        {al.map((alb) => (
+            <li style={{ marginTop: "20px" }} key={alb.id}>
+              {alb.title}
+              {alb.title}
+            </li>
+          ))}
       </ol>
     </div>
   );
