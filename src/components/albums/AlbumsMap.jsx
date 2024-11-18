@@ -24,6 +24,7 @@ const AlbumsMap = () => {
     setCountValue("");
   };
   const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
+  
   return (
     <div>
       <span style={{ margin: "10px" }}>add and select</span>

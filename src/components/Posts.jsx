@@ -12,8 +12,8 @@ const Posts = () => {
   const [checkbox, setCheckbox] = useState(false);
   const dispatch = useDispatch();
   const [count, setCount] = useState('')
-  //const [sorted, setSorted] = useState("id")
-  const posts = useSelector(selectors.selectAll);
+  //const [sorted, setSorted] = useState("name")
+  const posts = useSelector(selectors.selectIds);
 
   const changeCheckbox = () => setCheckbox(!checkbox);
   const router = useNavigate();
@@ -24,9 +24,13 @@ const Posts = () => {
     dispatch(fetchUsers(count));
   }, [dispatch]);
 
-  //const sortedPosts = [...posts].sort((a,b)=> a[sorted].localeComapare(b[sorted]))
-       /*
-       <select value={sorted} onChange={(e) => setSorted(e.target.value)}>
+ 
+       
+       
+       //const sortedPosts = [...posts].sort((a,b) => a[sorted].localeComapare(b[sorted]))
+
+  
+  /*<select value={sorted} onChange={(e) => setSorted(e.target.value)}>
         <option disabled value="">сортировка по</option>
         <option value="id">по id </option>
         <option value="name">по имени</option>
@@ -34,7 +38,6 @@ const Posts = () => {
         <option value="email">по email</option>
       </select>
       */
-
 
   return (
     <div className="postsItem">

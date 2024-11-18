@@ -16,7 +16,7 @@ export const apiApp = createApi({
       providesTags: ['Albums']
     }),
     getComments: builder.query({
-      query : () => '/comments',
+      query : (limit='') => `/comments?${limit && `_limit=${limit}`}`,
       providesTags:['Comments'],
     }),
     addComments : builder.mutation({
