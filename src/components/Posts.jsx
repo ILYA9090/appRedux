@@ -1,96 +1,51 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import {
-  selectors,
-  deleteUser,
-  removePost,
-  fetchUsers,
-  reset,
-  addTasks,
-} from "../slices/tasksSlice";
+import { selectors, deleteUser, fetchUsers, reset } from "../slices/tasksSlice";
 import { useDispatch } from "react-redux";
 import "./style.css";
-import SortPosts from "./SortPosts";
-import MyInput from "./MyInput";
+
 import { useNavigate } from "react-router-dom";
 
 // этот компонент маппит (отображет) текущее состояние, которое я изменяю с попомщью диспатча в компоненте PostApp
-const Posts = ({ children }) => {
+const Posts = () => {
   const [checkbox, setCheckbox] = useState(false);
-
-  const [query, setQuery] = useState("");
   const dispatch = useDispatch();
-
+  const [count, setCount] = useState('')
+  //const [sorted, setSorted] = useState("id")
   const posts = useSelector(selectors.selectAll);
 
   const changeCheckbox = () => setCheckbox(!checkbox);
   const router = useNavigate();
-  /*useEffect(() => {
-  const requestData = async () => {
-    const responce = await axios.get(
-      "https://jsonplaceholder.typicode.com/users?_limit=10"
-    );
-    dispatch(addTasks(responce.data))
-  };
-  requestData();
-}, []);
-*/
 
-  /*const removeList = (taskId) => {
-    setPostItem(postItem.filter((item) => item.id !== taskId));
-  };
-  
+       
 
-  const rm = () => {
-    
-    //setPostItem(postItem.filter(post => post.id !==post.id))
-    setPostItem([]);
-  };
-
-<div className = 'fetchItem'>
-        {postItem.map((p) => (
-          <ul>
-            <li key={p.id}>
-              {p.name}
-              {p.username}
-            </li>
-            <button onClick={() => removeList(p.id)}>delete</button>
-            <button onClick={() => rm()}>delete All Posts</button>
-          </ul>
-        ))}
-      </div>
-  */
-  useEffect(() => {
-    dispatch(fetchUsers());
+  useEffect((count) => {
+    dispatch(fetchUsers(count));
   }, [dispatch]);
 
-  /* Не работает
-  const sortUsers = (sort) => {
-    setSelectedSort(sort)
-    dispatch(addTasks(([...posts].sort((a,b) => a[sort].localeCompare(b[sort])))))
-    //dispatch(reset());
-    //dispatch(addTasks({sorted}))
-  }
-*/
+  //const sortedPosts = [...posts].sort((a,b)=> a[sorted].localeComapare(b[sorted]))
+       /*
+       <select value={sorted} onChange={(e) => setSorted(e.target.value)}>
+        <option disabled value="">сортировка по</option>
+        <option value="id">по id </option>
+        <option value="name">по имени</option>
+        <option value="username">по фамилии</option>
+        <option value="email">по email</option>
+      </select>
+      */
 
-  // не получается добавить и выводить вложенный обьект
+
   return (
     <div className="postsItem">
-      <MyInput
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Поиск"
-      />
-
-      <SortPosts
-        posts={posts}
-        defaultValue="по умолчанию"
-        options={[
-          { value: "name", name: "по Имени" },
-          { value: "username", name: "По фамилии" },
-        ]}
-      />
+      <div>
+        <select value={count} onChange={(e)=> setCount(e.target.value)}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value={count}>{count}</option>
+        </select>
+      </div>
       {posts.length === 0 ? (
         <h1 style={{ textAlign: "center" }}>пользователи не найдены!</h1>
       ) : (

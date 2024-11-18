@@ -8,7 +8,7 @@ export const apiApp = createApi({
   }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => '/posts',
+      query: (limit='') => `/posts?${limit && `_limit=${limit}`}`,
       providesTags : ['Posts'],
     }),
     getAlbums : builder.query({

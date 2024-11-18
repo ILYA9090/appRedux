@@ -13,7 +13,8 @@ import Clock from "./Clock";
 const PostsJson = ({ children }) => {
   const [text, setText] = useState("");
   const [modal, setModal] = useState(false);
-  const { data = [], isLoading} = useGetPostsQuery();
+  const [count, setCount] = useState("");
+  const { data = [], isLoading } = useGetPostsQuery(count);
   const [addPosts, {}] = useAddPostsMutation();
   const [remove, { isError }] = useRemovePostsMutation();
 
@@ -50,7 +51,12 @@ const PostsJson = ({ children }) => {
           </button>
         </form>
       </Modal>
-      <DataJsonMap data={data} handleDeletePosts={handleDeletePosts} />
+      <DataJsonMap
+        data={data}
+        handleDeletePosts={handleDeletePosts}
+        count={count}
+        setCount={setCount}
+      />
     </div>
   );
 };
