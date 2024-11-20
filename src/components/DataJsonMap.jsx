@@ -1,11 +1,11 @@
 import React from "react";
 import "./style.css";
 import MyButtonDeletePosts from "./MyButtonDeletePosts";
-
+import SelectSort from "./SelectSort";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
-  const [sorted, setSortded] = useState('id')
+  const [sorted, setSorted] = useState('id')
   const [sortedCount, setSortedCount] = useState('')
   /*хук useNavigate используется для того, что бы при нажатии 
   на кнопку меня перекидывало на другую страницу по 
@@ -21,12 +21,11 @@ const handleAddSelect = (e) => {
   const router = useNavigate();
   return (
     <div>
-      <div>
-        <select value={sorted} onChange={(e)=> setSortded(e.target.value)}>
-          <option disabled value=''>сортировка по</option>
-          <option value="id">по id поста</option>
-          <option value="title">по тексту</option>
-        </select>
+        <SelectSort setSorted={setSorted} sorted={sorted} defaultValueDisabled="сортировка по" 
+        options={[
+          {value: 'id', name: "по id поста"}, 
+          {value: 'title', name: "по тексту"}]}/>
+          <div>
         <input  placeholder="add value in select" value={sortedCount} onChange={(e)=> setSortedCount(e.target.value)}/>
         <select value={count} onChange={handleAddSelect}>
           <option value="1">1</option>

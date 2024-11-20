@@ -3,6 +3,7 @@ import { useGetCommentsQuery } from "../../slices/apiApp";
 import { useDeleteCommentsMutation } from "../../slices/apiApp";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import SelectSort from "../SelectSort";
 const CommentsMap = () => {
   const [count, setCount] = useState('')
   const { data =[] } = useGetCommentsQuery(count);
@@ -13,6 +14,16 @@ const CommentsMap = () => {
   const handleDeleteCom = async (id) => {
     return await remove(id);
   };
+
+
+  /*
+  select value={sorted} onChange={(e)=> setSorted(e.target.value)}>
+          <option disabled name="">сортировка по</option>
+          <option value="id">id</option>
+          <option value="text">названию</option>
+        </select>
+        */
+
 
   const sortedPosts = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted]))
   
@@ -31,12 +42,10 @@ const CommentsMap = () => {
           <option value="3">3</option>
           <option value={selectedCount}>{selectedCount}</option>
         </select>
-        
-        <select value={sorted} onChange={(e)=> setSorted(e.target.value)}>
-          <option disabled name="">сортировка по</option>
-          <option value="id">id</option>
-          <option value="text">названию</option>
-        </select>
+        <SelectSort setSorted={setSorted} sorted={sorted} defaultValueDisabled="сортировка по" 
+        options={[
+          {value: 'id', name: "по id"}, 
+          {value: 'text', name: "по названию"}]}/>
       </div>
       <ol>
         <div className="commentsMap">

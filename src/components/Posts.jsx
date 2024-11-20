@@ -13,15 +13,15 @@ const Posts = () => {
   const dispatch = useDispatch();
   const [count, setCount] = useState('')
   //const [sorted, setSorted] = useState("name")
-  const posts = useSelector(selectors.selectIds);
+  const posts = useSelector(selectors.selectAll);
 
   const changeCheckbox = () => setCheckbox(!checkbox);
   const router = useNavigate();
 
        
 
-  useEffect((count) => {
-    dispatch(fetchUsers(count));
+  useEffect(() => {
+    dispatch(fetchUsers());
   }, [dispatch]);
 
  
@@ -41,14 +41,6 @@ const Posts = () => {
 
   return (
     <div className="postsItem">
-      <div>
-        <select value={count} onChange={(e)=> setCount(e.target.value)}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value={count}>{count}</option>
-        </select>
-      </div>
       {posts.length === 0 ? (
         <h1 style={{ textAlign: "center" }}>пользователи не найдены!</h1>
       ) : (

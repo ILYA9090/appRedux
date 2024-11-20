@@ -1,6 +1,7 @@
 import React from "react";
 import { useGetAlbumsQuery } from "../../slices/apiApp";
 import { useState } from "react";
+import SelectSort from "../SelectSort";
 
 const AlbumsMap = () => {
   const [count, setCount] = useState("");
@@ -40,14 +41,13 @@ const AlbumsMap = () => {
           <option value="3">3</option>
           <option value={countValue}>{countValue}</option>
         </select>
-        <select value={sorted} onChange={(e) => setSorted(e.target.value)}>
-          <option disabled value="">сортировка по</option>
-          <option value="title">по title</option>
-          <option value="body">по body</option>
-          <option value="id">по id</option>
-        </select>
-      </div>
-
+        </div>
+        <SelectSort sorted={sorted} setSorted={setSorted} defaultValueDisabled="сортировка по" 
+          options={[{value: 'id', name: 'по id'},
+                    {value: 'title', name: 'по title'},
+                    {value: 'body', name: 'по body'},     
+          ]}
+        />
       <ol style={{ marginTop: "50px" }}>
         {al.map((alb) => (
           <li style={{ marginTop: "20px" }} key={alb.id}>
