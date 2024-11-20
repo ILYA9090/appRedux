@@ -2,11 +2,12 @@ import React from "react";
 import { useGetAlbumsQuery } from "../../slices/apiApp";
 import { useState } from "react";
 import SelectSort from "../SelectSort";
-
+import InputForSorted from "../InputForSorted";
 const AlbumsMap = () => {
   const [count, setCount] = useState("");
   const [countValue, setCountValue] = useState("");
   const [sorted, setSorted] = useState("id");
+  const [searchParams, setSearchParams] = useState('')
   const { data = [] } = useGetAlbumsQuery(count);
   // реализовать сортировку по title и по body, важно делать сортировку именно копируя массив через оператор spred ...
   // [...data].sort((a,b)=> a.title.localeCompare(b.title))
@@ -24,7 +25,7 @@ const AlbumsMap = () => {
     setCount(e.target.value);
     setCountValue("");
   };
-  const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
+  const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams)); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
   
   return (
     <div>
@@ -42,6 +43,7 @@ const AlbumsMap = () => {
           <option value={countValue}>{countValue}</option>
         </select>
         </div>
+        <InputForSorted searchParams={searchParams} setSearchParams={setSearchParams}/>
         <SelectSort sorted={sorted} setSorted={setSorted} defaultValueDisabled="сортировка по" 
           options={[{value: 'id', name: 'по id'},
                     {value: 'title', name: 'по title'},

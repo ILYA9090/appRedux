@@ -4,16 +4,18 @@ import MyButtonDeletePosts from "./MyButtonDeletePosts";
 import SelectSort from "./SelectSort";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import InputForSorted from "./InputForSorted";
 const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
   const [sorted, setSorted] = useState('id')
   const [sortedCount, setSortedCount] = useState('')
+  const [searchParams, setSearchParams] = useState('')
   /*хук useNavigate используется для того, что бы при нажатии 
   на кнопку меня перекидывало на другую страницу по 
   айдишнмку, эта логика написана в appRouter самое первое
   */
 
 
- const posts = [...data].sort((a,b)=> a[sorted].localeCompare(b[sorted]))
+ const posts = [...data].sort((a,b)=> a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams))
 const handleAddSelect = (e) => {
   setCount(e.target.value)
   setSortedCount('')
@@ -34,6 +36,7 @@ const handleAddSelect = (e) => {
           <option value={sortedCount}>{sortedCount}</option>
         </select>
       </div>
+      <InputForSorted searchParams={searchParams} setSearchParams={setSearchParams}/>
       {posts.length === 0 ? (
         <h1>постов нет!</h1>
       ) : (
