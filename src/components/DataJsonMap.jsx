@@ -11,7 +11,7 @@ const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
   const [searchParams, setSearchParams] = useState('')
   /*хук useNavigate используется для того, что бы при нажатии 
   на кнопку меня перекидывало на другую страницу по 
-  айдишнмку, эта логика написана в appRouter самое первое
+  айдишнмку, эта логика написана в appRouter
   */
 
 

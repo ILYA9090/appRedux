@@ -4,7 +4,8 @@ const CommentsAddThings = () => {
 
         const [comments, setComments] = useState([])
         const [text, setText] = useState('');
-
+        const [count, setCount] = useState(0)
+        const [num, setNum] = useState(0);
         const route = useNavigate();
         const params = useParams()
         const handleAddComThings = (e) => {
@@ -18,6 +19,25 @@ const CommentsAddThings = () => {
             const handleRemoveCom = (id) => {
                 setComments(comments.filter((com) => com.id !== id));
             }
+
+
+            const plus = () => {
+              setCount(parseInt(count) + parseInt(num))
+              setNum('')
+            }
+            const minus = () => {
+              setCount(count - num)
+              setNum('')
+            }
+            const ymnojenie = () => {
+              setCount(count * num)
+              setNum('')
+            }
+            const delenie = () => {
+              setCount(count / num)
+              setNum('')
+            }
+
   return (
     <div>
       <div style={{display:'flex', justifyContent:'center'}}>
@@ -42,6 +62,18 @@ const CommentsAddThings = () => {
         </ol>
         <button onClick={() => setComments([])}>Удалить всё</button>
         <button onClick={()=>route("/commentsList")}>Вернуться назад</button>
+        <div style={{display: 'flex', flexDirection: 'column', marginRight: '97%'}}>
+          {count}
+          <button onClick={plus}>+</button>
+          <button onClick={minus}>-</button>
+          <button onClick={ymnojenie}>*</button>
+          <button onClick={delenie}>/</button>
+          <button onClick={()=>setCount(0)}>reset</button>
+          <input type='text'
+          value={num}
+          onChange={(e)=>setNum(e.target.value)}
+          />
+        </div>
     </div>
   )
 }

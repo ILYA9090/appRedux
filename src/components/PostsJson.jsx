@@ -11,7 +11,7 @@ import Modal from "./comments/Modal";
 import Clock from "./Clock";
 
 const PostsJson = ({ children }) => {
-  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
   const [modal, setModal] = useState(false);
   const [count, setCount] = useState("");
   const { data = [], isLoading } = useGetPostsQuery(count);
@@ -20,9 +20,9 @@ const PostsJson = ({ children }) => {
 
   const handleAddPosts = async (e) => {
     e.preventDefault();
-    if (text.trim()) {
-      await addPosts({ title: text });
-      setText("");
+    if (title.trim()) {
+      await addPosts({ title });
+      setTitle("");
       setModal(false);
     }
   };
@@ -43,8 +43,8 @@ const PostsJson = ({ children }) => {
           <input
             type="text"
             placeholder="введите имя"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <button type="submit" value="add">
             add

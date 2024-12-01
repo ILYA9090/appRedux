@@ -3,13 +3,16 @@ import { useGetAlbumsQuery } from "../../slices/apiApp";
 import { useState } from "react";
 import SelectSort from "../SelectSort";
 import InputForSorted from "../InputForSorted";
+import { useDeleteAlbumsMutation } from "../../slices/apiApp";
+import { useNavigate } from "react-router-dom";
 const AlbumsMap = () => {
   const [count, setCount] = useState("");
   const [countValue, setCountValue] = useState("");
   const [sorted, setSorted] = useState("id");
   const [searchParams, setSearchParams] = useState('')
   const { data = [] } = useGetAlbumsQuery(count);
-  // реализовать сортировку по title и по body, важно делать сортировку именно копируя массив через оператор spred ...
+  const [ remove ] = useDeleteAlbumsMutation()
+    // реализовать сортировку по title и по body, важно делать сортировку именно копируя массив через оператор spread...
   // [...data].sort((a,b)=> a.title.localeCompare(b.title))
 
   /*<ol style={{ marginTop: "50px" }}>
@@ -20,7 +23,8 @@ const AlbumsMap = () => {
 ))}
 </ol>
 */
-
+  const handleRemoveItem = async (id) => await remove(id);
+  const route = useNavigate()
   const handleSelect = (e) => {
     setCount(e.target.value);
     setCountValue("");
@@ -53,7 +57,9 @@ const AlbumsMap = () => {
       <ol style={{ marginTop: "50px" }}>
         {al.map((alb) => (
           <li style={{ marginTop: "20px" }} key={alb.id}>
-            title:{alb.title}/ body:{alb.title}
+            {alb.title}/{alb.title}
+            <button onClick={() => handleRemoveItem(alb.id)}>delete</button>
+            <button onClick={()=> route(`/postsComment/${alb.id}`)}>открыть альбом</button>
           </li>
         ))}
       </ol>

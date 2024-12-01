@@ -2,37 +2,64 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiApp = createApi({
   reducerPath: "Api",
-  tagTypes: ['Posts', 'Comments', 'Albums'],
+  tagTypes: ["Posts", "Comments", "Albums", "Clients"],
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001",
   }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: (limit='') => `/posts?${limit && `_limit=${limit}`}`,
-      providesTags : ['Posts'],
+      query: (limit = "") => `/posts?${limit && `_limit=${limit}`}`,
+      providesTags: ["Posts"],
     }),
-    getAlbums : builder.query({
-      query:(limit='') => `/albums?${limit && `_limit=${limit}`}`,
-      providesTags: ['Albums']
+    getAlbums: builder.query({
+      query: (limit = "") => `/albums?${limit && `_limit=${limit}`}`,
+      providesTags: ["Albums"],
+    }),
+    getClients: builder.query({
+      query: () => "/clients",
+      providesTags: ["Clients"],
     }),
     getComments: builder.query({
-      query : (limit='') => `/comments?${limit && `_limit=${limit}`}`,
-      providesTags:['Comments'],
+      query: (limit = "") => `/comments?${limit && `_limit=${limit}`}`,
+      providesTags: ["Comments"],
     }),
-    addComments : builder.mutation({
-      query : (post) => ({
-        url:'/comments',
-        method: 'POST', 
-        body: post
+    addComments: builder.mutation({
+      query: (post) => ({
+        url: "/comments",
+        method: "POST",
+        body: post,
       }),
-      invalidatesTags:['Comments'],
+      invalidatesTags: ["Comments"],
     }),
-    deleteComments : builder.mutation({
-      query:(id) => ({
-        url :`/comments/${id}`,
-        method: 'DELETE',
+    addClients: builder.mutation({
+      query: (post) => ({
+        url: "/clients",
+        method: "POST",
+        body: post,
       }),
-      invalidatesTags:['Comments'],
+      invalidatesTags: ["Clients"],
+    }),
+    addAlbums: builder.mutation({
+      query: (post) => ({
+        url: "/albums",
+        method: "POST",
+        body: post,
+      }),
+      invalidatesTags: ["Albums"],
+    }),
+    deleteAlbums: builder.mutation({
+      query: (id) => ({
+        url: `/albums/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Albums"],
+    }),
+    deleteComments: builder.mutation({
+      query: (id) => ({
+        url: `/comments/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Comments"],
     }),
     addPosts: builder.mutation({
       query: (post) => ({
@@ -40,28 +67,39 @@ export const apiApp = createApi({
         method: "POST",
         body: post,
       }),
-      invalidatesTags:['Posts']
+      invalidatesTags: ["Posts"],
     }),
     removePosts: builder.mutation({
-        query: (id) => ({
-          url: `/posts/${id}`,
-          method: 'DELETE',
-        }),
-        invalidatesTags:['Posts']
+      query: (id) => ({
+        url: `/posts/${id}`,
+        method: "DELETE",
       }),
-      removeAllPosts: builder.mutation({
-        query: () => ({
-          url:`/posts`,
-          method: 'DELETE',
-        }),
-        invalidatesTags:['Posts']
-      })
+      invalidatesTags: ["Posts"],
+    }),
+    removeAllPosts: builder.mutation({
+      query: () => ({
+        url: `/posts`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Posts"],
+    }),
   }),
-  transformResponce : responce => ({
-    
+  transformResponce: (responce) => ({
     totalPages: responce.totalPages,
-  })
+  }),
 });
 
-export const { useDeleteCommentsMutation, useGetPostsQuery, useAddPostsMutation, useRemovePostsMutation, useRemoveAllPostsMutation, useGetCommentsQuery, useAddCommentsMutation, useGetAlbumsQuery} =
-  apiApp;
+export const {
+  useDeleteCommentsMutation,
+  useGetPostsQuery,
+  useAddPostsMutation,
+  useRemovePostsMutation,
+  useRemoveAllPostsMutation,
+  useGetCommentsQuery,
+  useAddCommentsMutation,
+  useGetAlbumsQuery,
+  useAddAlbumsMutation,
+  useDeleteAlbumsMutation,
+  useGetClientsQuery,
+  useAddClientsMutation,
+} = apiApp;

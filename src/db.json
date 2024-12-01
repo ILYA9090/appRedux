@@ -13,10 +13,6 @@
       "title": "sddsd"
     },
     {
-      "id": "4323",
-      "title": "ddddadsa"
-    },
-    {
       "id": "d53e",
       "title": "213132"
     },
@@ -27,10 +23,6 @@
     {
       "id": "97c9",
       "title": "sdadadsad"
-    },
-    {
-      "id": "2df3",
-      "title": "dadd"
     },
     {
       "id": "a9a3",
@@ -71,24 +63,22 @@
       "text": "dasds"
     },
     {
-      "id": "196d",
-      "text": "12313"
-    },
-    {
       "id": "995b",
       "text": "1"
+    },
+    {
+      "id": "4a59",
+      "text": "222"
+    },
+    {
+      "id": "8598",
+      "text": "dddd"
     }
   ],
   "profile": {
     "name": "typicode"
   },
   "albums": [
-    {
-      "userId": 1,
-      "id": "1",
-      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-    },
     {
       "userId": 1,
       "id": "2",
@@ -138,36 +128,6 @@
       "body": "consectetur animi nesciunt iure dolore\nenim quia ad\nveniam autem ut quam aut nobis\net est aut quod aut provident voluptas autem voluptas"
     },
     {
-      "userId": 1,
-      "id": "10",
-      "title": "optio molestias id quia eum",
-      "body": "quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error"
-    },
-    {
-      "userId": 2,
-      "id": "11",
-      "title": "et ea vero quia laudantium autem",
-      "body": "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi"
-    },
-    {
-      "userId": 2,
-      "id": "12",
-      "title": "in quibusdam tempore odit est dolorem",
-      "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
-    },
-    {
-      "userId": 2,
-      "id": "13",
-      "title": "dolorum ut in voluptas mollitia et saepe quo animi",
-      "body": "aut dicta possimus sint mollitia voluptas commodi quo doloremque\niste corrupti reiciendis voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam"
-    },
-    {
-      "userId": 2,
-      "id": "14",
-      "title": "voluptatem eligendi optio",
-      "body": "fuga et accusamus dolorum perferendis illo voluptas\nnon doloremque neque facere\nad qui dolorum molestiae beatae\nsed aut voluptas totam sit illum"
-    },
-    {
       "userId": 2,
       "id": "15",
       "title": "eveniet quod temporibus",
@@ -202,12 +162,6 @@
       "id": "20",
       "title": "doloribus ad provident suscipit at",
       "body": "qui consequuntur ducimus possimus quisquam amet similique\nsuscipit porro ipsam amet\neos veritatis officiis exercitationem vel fugit aut necessitatibus totam\nomnis rerum consequatur expedita quidem cumque explicabo"
-    },
-    {
-      "userId": 3,
-      "id": "21",
-      "title": "asperiores ea ipsam voluptatibus modi minima quia sint",
-      "body": "repellat aliquid praesentium dolorem quo\nsed totam minus non itaque\nnihil labore molestiae sunt dolor eveniet hic recusandae veniam\ntempora et tenetur expedita sunt"
     },
     {
       "userId": 3,
@@ -382,6 +336,47 @@
       "id": "50",
       "title": "repellendus qui recusandae incidunt voluptates tenetur qui omnis exercitationem",
       "body": "error suscipit maxime adipisci consequuntur recusandae\nvoluptas eligendi et est et voluptates\nquia distinctio ab amet quaerat molestiae et vitae\nadipisci impedit sequi nesciunt quis consectetur"
+    },
+    {
+      "id": "76be",
+      "title": "sdaddadsd",
+      "body": "sadasdas"
+    },
+    {
+      "id": "2d3b",
+      "title": "ввф",
+      "body": "ывфыв"
+    },
+    {
+      "id": "1f9c",
+      "title": "123",
+      "body": "123"
+    },
+    {
+      "id": "d178",
+      "title": "fds",
+      "body": "adadad"
+    }
+  ],
+  "clients": [
+    {
+      "userId": 1,
+      "id": "1",
+      "name": "ilya",
+      "surname": "Ovchinnikov",
+      "number": "79277408450"
+    },
+    {
+      "id": "3388",
+      "name": "Alexey",
+      "surname": "Ovchinnikov",
+      "number": "79272055588"
+    },
+    {
+      "id": "5a86",
+      "name": "ilya",
+      "surname": "f",
+      "number": "adedwd"
     }
   ]
 }
