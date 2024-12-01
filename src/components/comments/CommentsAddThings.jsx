@@ -72,6 +72,7 @@ const CommentsAddThings = () => {
           <input type='text'
           value={num}
           onChange={(e)=>setNum(e.target.value)}
+          onClick={()=> setNum('')}
           />
         </div>
     </div>
