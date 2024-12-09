@@ -15,7 +15,7 @@ const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
   */
 
 
- const posts = [...data].sort((a,b)=> a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams))
+ const posts = [...data].sort((a,b)=> a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams.toLowerCase()))
 const handleAddSelect = (e) => {
   setCount(e.target.value)
   setSortedCount('')

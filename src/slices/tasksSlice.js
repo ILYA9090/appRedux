@@ -32,9 +32,9 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async (limit) => {
   const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/users`
+    `https://jsonplaceholder.typicode.com/users?${`_limit=${limit}`}`
   );
   return await response.data;
 });

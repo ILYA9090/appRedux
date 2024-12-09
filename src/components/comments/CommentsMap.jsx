@@ -30,7 +30,7 @@ const CommentsMap = () => {
 
   const sortedPosts = [...data]
   .sort((a, b) => a[sorted].localeCompare(b[sorted]))
-  .filter((post) => post.text.includes(searchParams))
+  .filter((post) => post.text.includes(searchParams.toLowerCase()))
   
 
   //const filandsortposts = sortedPosts.filter((post) => post.text.includes(searchParams))

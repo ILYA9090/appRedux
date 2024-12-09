@@ -23,13 +23,15 @@ const AlbumsMap = () => {
 ))}
 </ol>
 */
+
+console.log(data);
   const handleRemoveItem = async (id) => await remove(id);
   const route = useNavigate()
   const handleSelect = (e) => {
     setCount(e.target.value);
     setCountValue("");
   };
-  const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams)); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
+  const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams.toLowerCase())); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
   
   return (
     <div>
@@ -59,7 +61,7 @@ const AlbumsMap = () => {
           <li style={{ marginTop: "20px" }} key={alb.id}>
             {alb.title}/{alb.title}
             <button onClick={() => handleRemoveItem(alb.id)}>delete</button>
-            <button onClick={()=> route(`/postsComment/${alb.id}`)}>открыть альбом</button>
+            <button onClick={()=> route(`/AlbumsThings/${alb.id}`)}>открыть альбом</button>
           </li>
         ))}
       </ol>
