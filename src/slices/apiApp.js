@@ -2,13 +2,33 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiApp = createApi({
   reducerPath: "Api",
-  tagTypes: ["Posts", "Comments", "Albums", "Clients"],
+  tagTypes: ["Posts", "Comments", "Albums", "Clients", "Entities"],
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001",
   }),
   endpoints: (builder) => ({
+    getEntities: builder.query({
+      query: () => `/entities`,
+      providesTags: ["Entities"],
+    }),
+    addEntities: builder.mutation({
+      query: (body) => ({
+        url: `/entities`,
+        method: "POST",
+        body
+      }),
+      invalidatesTags: ["Entities"],
+    }),
+    deleteEntities: builder.mutation({
+      query: (id) => ({
+        url: `/entities/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Entities"],
+    }),
     getPosts: builder.query({
       query: (limit = "") => `/posts?${limit && `_limit=${limit}`}`,
+
       providesTags: ["Posts"],
     }),
     getAlbums: builder.query({
@@ -84,9 +104,6 @@ export const apiApp = createApi({
       invalidatesTags: ["Posts"],
     }),
   }),
-  transformResponce: (responce) => ({
-    totalPages: responce.totalPages,
-  }),
 });
 
 export const {
@@ -102,4 +119,7 @@ export const {
   useDeleteAlbumsMutation,
   useGetClientsQuery,
   useAddClientsMutation,
+  useGetEntitiesQuery,
+  useAddEntitiesMutation,
+  useDeleteEntitiesMutation
 } = apiApp;

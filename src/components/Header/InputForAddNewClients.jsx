@@ -1,49 +1,98 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useState } from "react";
 import { useAddClientsMutation } from "../../slices/apiApp";
 import Modal from "../comments/Modal";
+
 const InputForAddNewClients = () => {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [number, setNumber] = useState("");
   const [addClients] = useAddClientsMutation();
+  const [isValid, setisValid] = useState(false);
 
-  const handleAddNewClient = async (e) => {
-    e.preventDefault();
-    if(name && surname && number) {
-    addClients({ name, surname, number });
+  const handleValidForm = useCallback(({ name, surname, number }) => {
+    if (!name || !surname || !number) {
+      return setisValid(false);
+    }
+    return setisValid(true);
+  }, []);
+
+  const handleReset = useCallback(() => {
     setName("");
     setSurname("");
     setNumber("");
-    setVisible(false);
+    setisValid(false)
+  }, []);
+
+  const handleAddNewClient = (e) => {
+    e.preventDefault();
+    if (name && surname && number) {
+      addClients({ name, surname, number });
+      handleReset()
+      setVisible(false);
+    }
+  };
+
+  const handlChangeName = useCallback((e) => {
+    const name = e.target.value;
+    setName(name);
+    handleValidForm({ name, surname, number });
+  }, [handleValidForm, surname, number]);
+
+  const handlChangeSurname = (e) => {
+    const surname = e.target.value;
+    setSurname(e.target.value);
+    handleValidForm({ name, surname, number });
+  };
+
+  const handlChangeNumber = (e) => {
+    const number = e.target.value;
+    setNumber(number);
+    handleValidForm({ name, surname, number });
+  };
+  const handleCloseForm = () => {
+    handleReset()
+    setVisible(false)
   }
-};
   return (
     <div>
       <button onClick={() => setVisible(true)}>введите ваши даннные</button>
       <Modal visible={visible} setVisible={setVisible}>
-        <form style={{display:"flex", justifyContent:"center", flexDirection:"column"}}type="form" onSubmit={handleAddNewClient}>
+        <form
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+          onSubmit={handleAddNewClient}
+        >
           <input
             placeholder="введите ваше имя"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handlChangeName}
           />
           <input
             placeholder="введите вашу фамилию"
             type="text"
             value={surname}
-            onChange={(e) => setSurname(e.target.value)}
+            onChange={handlChangeSurname}
           />
           <input
             placeholder="введите номер телефона"
             type="text"
             value={number}
-            onChange={(e) => setNumber(e.target.value)}
+            onChange={handlChangeNumber}
           />
-          <button type="submit">внести данные</button>
+          <button disabled={!isValid} type="submit">
+            внести данные
+          </button>
         </form>
+        <div style={{ display: "flex", width: "300px", flexDirection: "row" }}>
+          <button onClick={handleCloseForm}>закрыть</button>
+          <button onClick={handleReset}>сбросить</button>
+        </div>
       </Modal>
     </div>
   );

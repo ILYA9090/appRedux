@@ -1,4 +1,5 @@
 import React from "react";
+import { useMemo } from "react";
 import { useGetAlbumsQuery } from "../../slices/apiApp";
 import { useState } from "react";
 import SelectSort from "../SelectSort";
@@ -24,14 +25,19 @@ const AlbumsMap = () => {
 </ol>
 */
 
-console.log(data);
   const handleRemoveItem = async (id) => await remove(id);
   const route = useNavigate()
   const handleSelect = (e) => {
     setCount(e.target.value);
     setCountValue("");
   };
-  const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams.toLowerCase())); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
+
+    const al = useMemo(() => {
+      const dat = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams.toLowerCase()));
+      return dat;
+},[sorted, data, searchParams ])
+    
+  //const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams.toLowerCase())); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
   
   return (
     <div>

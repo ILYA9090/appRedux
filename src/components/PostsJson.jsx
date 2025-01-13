@@ -3,7 +3,7 @@ import {
   useAddPostsMutation,
   useRemovePostsMutation,
 } from "../slices/apiApp";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./style.css";
 import React from "react";
 import DataJsonMap from "./DataJsonMap";
@@ -16,23 +16,47 @@ const PostsJson = ({ children }) => {
   const [count, setCount] = useState("");
   const { data = [], isLoading } = useGetPostsQuery(count);
   const [addPosts, {}] = useAddPostsMutation();
-  const [remove, { isError }] = useRemovePostsMutation();
+  const [remove] = useRemovePostsMutation();
+  const [valid, setIsValid ] = useState(false);
+
+  const resetForm = () => {
+    setTitle("")
+    setIsValid(false)
+  }
+
+
+  const handleIsValidForm = useCallback((title) => {
+    if (!title) {
+      return setIsValid(false)
+    }
+    return setIsValid(true)
+  }, [])
 
   const handleAddPosts = async (e) => {
     e.preventDefault();
     if (title.trim()) {
       await addPosts({ title });
-      setTitle("");
+      resetForm()
       setModal(false);
     }
   };
+  const handleCloseWindow = () => {
+    resetForm();
+    setModal(false);
+  }
+  const handleChangeInput = useCallback((e) => {
+    const title = e.target.value;
+    setTitle(title)
+    handleIsValidForm(title)
+  }, [ handleIsValidForm])
+
 
   const handleDeletePosts = async (id) => {
     await remove(id);
   };
 
   if (isLoading) return <h1>Loading</h1>;
-  //if(isError) return <h1>error</h1>
+
   return (
     <div className="apiQuery">
       <Clock />
@@ -44,11 +68,13 @@ const PostsJson = ({ children }) => {
             type="text"
             placeholder="введите имя"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={handleChangeInput}
           />
-          <button type="submit" value="add">
-            add
+          <button type="submit" disabled={!valid}>
+            добавить
           </button>
+          <button onClick={resetForm}>сбросить</button>
+          <button onClick={handleCloseWindow}>закрыть</button>
         </form>
       </Modal>
       <DataJsonMap

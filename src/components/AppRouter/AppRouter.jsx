@@ -13,6 +13,7 @@ import CommentsAddThings from "../comments/CommentsAddThings";
 import UserAdress from "../UserAdress";
 import AlbumsList from "../albums/AlbumsList";
 import AlbumsThings from "../albums/AlbumsThings";
+import Entites from "../myNewEntities/Entites";
 const AppRouter = () => {
   /*
       route работает так: в ссылке в верху страницы через слеш плюс название то есть path 
@@ -30,6 +31,7 @@ const AppRouter = () => {
 
   return authorization ? (
     <Routes>
+      <Route path ="/entities" element={<Entites/>}/>
       <Route path="/AlbumsThings/:id" element={<AlbumsThings/>}/>
       <Route path="/postsApp" element={<PostsApp />} />
       <Route path="/albumsList" element={<AlbumsList />} />

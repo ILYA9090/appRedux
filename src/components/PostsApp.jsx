@@ -1,7 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useCallback } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTasks, addUsersAx } from "../slices/tasksSlice";
+import { addUsersAx } from "../slices/tasksSlice";
 import "./style.css";
 import MyDescription from "./MyDescription";
 import Modal from "./comments/Modal";
@@ -12,21 +12,60 @@ const PostsApp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [modal, setModal] = useState(false);
+  const [valid, setIsValid] = useState(false);
   const dispatch = useDispatch();
 
+  const handleValidForm = useCallback((name, username, email) => {
+    if (!name || !username || !email) {
+      return setIsValid(false);
+    }
+    return setIsValid(true);
+  }, []);
+
+  const handleReset = (e) => {
+    setName("");
+    setUsername("");
+    setEmail("");
+  };
+  const handleCloseForm = () => {
+    handleReset();
+    setModal(false);
+  };
   // создаю функцию, которая добовляет в начальное состояние из слайса обьект с полями text(из хука useState) и id
   const handleSubmit = (e) => {
     e.preventDefault();
-    // не получается добавить и выводить вложенный обьект
     const userData = { name, username, email };
     if ((name && username).trim().length) {
       dispatch(addUsersAx({ userData }));
     }
-    setName("");
-    setUsername("");
-    setEmail("");
+    setIsValid(false)
+    handleReset();
     setModal(false);
   };
+
+  const handleChangeName = useCallback(
+    (e) => {
+      const name = e.target.value;
+      setName(name);
+      handleValidForm(name, username, email);
+    },
+    [handleValidForm, username, email]
+  );
+
+  const handleChangeUsername = useCallback(
+    (e) => {
+      const username = e.target.value;
+      setUsername(username);
+      handleValidForm(name, username, email);
+    },
+    [handleValidForm, name, email]
+  );
+
+  const handleChangeEmail = useCallback((e) => {
+    const email = e.target.value;
+    setEmail(email);
+    handleValidForm(name, username, email);
+  }, [handleValidForm, name, username]);
   // сначала изменение отлавливаются в инпуте, изменяя состояние потом этот text уже в Task из функции Handle
   return (
     <div>
@@ -44,26 +83,28 @@ const PostsApp = () => {
             <input
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleChangeName}
               placeholder="введите имя"
             />
             <p>введите фамилию</p>
             <input
               type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={handleChangeUsername}
               placeholder="введите фамилию"
             />
             <p>введите вашу почту</p>
             <input
               type="text"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChangeEmail}
               placeholder="введите почту"
             />
-            <button type="submit" value="Add">
-              add
+            <button type="submit" disabled={!valid}>
+              добавить
             </button>
+            <button onClick={handleCloseForm}>закрыть</button>
+            <button onClick={handleReset}>сброс</button>
           </form>
         </div>
       </Modal>

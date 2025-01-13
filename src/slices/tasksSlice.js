@@ -34,7 +34,7 @@ import axios from "axios";
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async (limit) => {
   const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/users?${`_limit=${limit}`}`
+    `https://jsonplaceholder.typicode.com/users?${limit && `_limit=${limit}`}`
   );
   return await response.data;
 });

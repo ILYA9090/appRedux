@@ -33,8 +33,7 @@ img {
   position: fixed;
   top: 10px;
   left: 10px;
-  float: left;
-}
+  float: left;}
 .inputItem {
   text-align: center;
 }
