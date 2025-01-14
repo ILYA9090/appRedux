@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Modal from "./Modal";
 import { useAddCommentsMutation } from "../../slices/apiApp";
 import "./commentsStyle.css";
@@ -6,12 +6,40 @@ const InputComments = () => {
   const [text, setText] = useState("");
   const [addPosts] = useAddCommentsMutation();
   const [modal, setModal] = useState(false);
+  const [valid, setIsValid] = useState(false)
+
+  const handleResetForm = () => {
+    setText('')
+    handleValidButtonForm()
+  }
+
+  const handleCloseForm = () => {
+    handleResetForm();
+    setModal(false)
+  }
+
+
+  const handleValidButtonForm = useCallback((text) => {
+    if (!text) {
+      return setIsValid(false)
+    }
+    return setIsValid(true)
+  }, [])
+
+  const handleChangeText = useCallback((e) => {
+    const text = e.target.value;
+    setText(text)
+    handleValidButtonForm(text)
+  }, [handleValidButtonForm])
+
+
+
   const handleSumbitForm = async (e) => {
     e.preventDefault();
     if (text.trim().length) {
       await addPosts({text});
-      setText("");
-      setModal(false);
+      handleResetForm()
+      setModal(false)
     }
   };
 
@@ -29,9 +57,11 @@ const InputComments = () => {
             <input
               type="text"
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={handleChangeText}
             />
-            <button type="submit">Add</button>
+            <button disabled={!valid} type="submit">Add</button>
+            <button onClick={handleResetForm}>сбросить</button>
+            <button onClick={handleCloseForm}>закрыть</button>
           </form>
         </div>
       </Modal>
