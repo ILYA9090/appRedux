@@ -50,10 +50,11 @@ const PostsJson = ({ children }) => {
     handleIsValidForm(title)
   }, [ handleIsValidForm])
 
-
+  
   const handleDeletePosts = async (id) => {
     await remove(id);
   };
+  
 
   if (isLoading) return <h1>Loading</h1>;
 

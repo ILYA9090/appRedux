@@ -6,6 +6,7 @@ import SelectSort from "../SelectSort";
 import InputForSorted from "../InputForSorted";
 import { useDeleteAlbumsMutation } from "../../slices/apiApp";
 import { useNavigate } from "react-router-dom";
+import cl from "./Albums.module.css"
 const AlbumsMap = () => {
   const [count, setCount] = useState("");
   const [countValue, setCountValue] = useState("");
@@ -24,7 +25,6 @@ const AlbumsMap = () => {
 ))}
 </ol>
 */
-
   const handleRemoveItem = async (id) => await remove(id);
   const route = useNavigate()
   const handleSelect = (e) => {
@@ -38,7 +38,7 @@ const AlbumsMap = () => {
 },[sorted, data, searchParams ])
     
   //const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams.toLowerCase())); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
-  
+  let a = 130;
   return (
     <div>
       <span style={{ margin: "10px" }}>add and select</span>
@@ -62,15 +62,17 @@ const AlbumsMap = () => {
                     {value: 'body', name: 'по body'},     
           ]}
         />
+        <div className={cl.list} >
       <ol style={{ marginTop: "50px" }}>
         {al.map((alb) => (
-          <li style={{ marginTop: "20px" }} key={alb.id}>
-            {alb.title}/{alb.title}
+          <li key={alb.id} className={cl.ListMap}>
+            {alb.title}/{alb.body.length > a ? alb.body.slice(0, -145) + '...' : alb.body}
             <button onClick={() => handleRemoveItem(alb.id)}>delete</button>
             <button onClick={()=> route(`/AlbumsThings/${alb.id}`)}>открыть альбом</button>
           </li>
         ))}
       </ol>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./yup";
+import "./Login.css"
 const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");

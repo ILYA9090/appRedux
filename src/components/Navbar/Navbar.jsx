@@ -8,8 +8,9 @@ const Navbar = () => {
       КОМПОНЕНТ LINK ВМЕСТЕ С ПРОПСАМИ to вместо обычных тегов <a> и ссылок href
     */
 
-      const {setAuthorization} = useContext(UserContext)
-  return (
+      const {authorization, setAuthorization} = useContext(UserContext)
+  return authorization ? (
+    
     <div className={cl.navbar}>
         <div className={cl.navbar__Links}>
           <button onClick={()=>setAuthorization(false)}>выйти</button>
@@ -21,7 +22,7 @@ const Navbar = () => {
           <Link to="/entities">ent</Link>
         </div>
       </div>
-  )
+  ) : (<p></p>)
 }
 
 export default Navbar
