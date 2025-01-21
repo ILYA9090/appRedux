@@ -69,7 +69,7 @@ const Login = () => {
   );
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className="login">
       <button onClick={() => setModal(true)}>Хотите войти?</button>
       <Modal visible={modal} setVisible={setModal} handleResetForm={handleResetForm}>
         <form type="form" onSubmit={handleSubmit(handleSubmitForm)}>

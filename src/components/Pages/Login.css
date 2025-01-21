@@ -1,3 +1,8 @@
 button[disabled] {
     background-color: red;
 }
+.login {
+    display: flex;
+    justify-content: center;
+    
+}
