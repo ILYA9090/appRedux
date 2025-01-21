@@ -10,18 +10,18 @@ import DataJsonMap from "./DataJsonMap";
 import Modal from "./comments/Modal";
 import Clock from "./Clock";
 
-const PostsJson = ({ children }) => {
+const PostsJson = () => {
   const [title, setTitle] = useState("");
   const [modal, setModal] = useState(false);
   const [count, setCount] = useState("");
   const { data = [], isLoading } = useGetPostsQuery(count);
-  const [addPosts, {}] = useAddPostsMutation();
+  const [addPosts] = useAddPostsMutation();
   const [remove] = useRemovePostsMutation();
   const [valid, setIsValid ] = useState(false);
 
   const resetForm = () => {
     setTitle("")
-    setIsValid(false)
+    handleIsValidForm()
   }
 
 
@@ -63,7 +63,7 @@ const PostsJson = ({ children }) => {
       <Clock />
       <h1>список постов</h1>
       <button onClick={() => setModal(true)}>Добавить новый пост</button>
-      <Modal visible={modal} setVisible={setModal}>
+      <Modal visible={modal} setVisible={setModal} handleResetForm={resetForm}>
         <form onSubmit={handleAddPosts}>
           <input
             type="text"

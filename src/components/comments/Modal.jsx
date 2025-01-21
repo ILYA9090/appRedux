@@ -1,6 +1,6 @@
 import React from "react";
 import cl from "./Modal.module.css";
-const Modal = ({ children, visible, setVisible }) => {
+const Modal = ({ children, visible, setVisible, handleResetForm }) => {
   
   const rootClasses = [cl.Modal];
   if (visible) {
@@ -8,8 +8,13 @@ const Modal = ({ children, visible, setVisible }) => {
   
   }
 
+    const handleCloseForm = () => {
+      setVisible(false)
+      handleResetForm()
+    }
+
   return (
-    <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
+    <div className={rootClasses.join(' ')} onClick={handleCloseForm}>
       <div className={cl.ModalContent} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>

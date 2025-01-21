@@ -51,7 +51,7 @@ const InputComments = () => {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <button onClick={() => setModal(true)}>создать комментарий</button>
       </div>
-      <Modal visible={modal} setVisible={setModal}>
+      <Modal visible={modal} setVisible={setModal} handleResetForm={handleResetForm}>
         <div className="formComments">
           <form type="form" onSubmit={handleSumbitForm}>
             <input

@@ -11,7 +11,7 @@ const AddNewAlbum = () => {
   const resetAlbum = () => {
     setTitle("");
     setBody("");
-    setIsValid(false)
+    handleSetIsValidButton();
   };
 
   const handleSetIsValidButton = useCallback((title, body) => {
@@ -27,30 +27,38 @@ const AddNewAlbum = () => {
       await addAlbums({ title, body });
       resetAlbum();
       setVisible(false);
-      
     }
   };
 
-  const handleChangeTitle = useCallback((e) => {
-    const title = e.target.value;
-    setTitle(title);
-    handleSetIsValidButton(title, body)
-  }, [handleSetIsValidButton, body]);
+  const handleChangeTitle = useCallback(
+    (e) => {
+      const title = e.target.value;
+      setTitle(title);
+      handleSetIsValidButton(title, body);
+    },
+    [handleSetIsValidButton, body]
+  );
 
-
-  const handleChangeBodyForm = useCallback((e) => {
-    const body = e.target.value;
-    setBody(body)
-    handleSetIsValidButton(title, body)
-  }, [handleSetIsValidButton, title] )
+  const handleChangeBodyForm = useCallback(
+    (e) => {
+      const body = e.target.value;
+      setBody(body);
+      handleSetIsValidButton(title, body);
+    },
+    [handleSetIsValidButton, title]
+  );
   const handleCloseForm = () => {
-    resetAlbum()
-    setVisible(false)
-  }
+    resetAlbum();
+    setVisible(false);
+  };
   return (
     <div>
       <button onClick={() => setVisible(true)}>добавить новый альбом</button>
-      <Modal visible={visible} setVisible={setVisible}>
+      <Modal
+        visible={visible}
+        setVisible={setVisible}
+        handleResetForm={resetAlbum}
+      >
         <form
           style={{
             display: "flex",

@@ -11,54 +11,67 @@ const InputForAddNewClients = () => {
   const [addClients] = useAddClientsMutation();
   const [isValid, setisValid] = useState(false);
 
-  const handleValidForm = useCallback(({ name, surname, number }) => {
+  const handleReset = () => {
+    setName("");
+    setSurname("");
+    setNumber("");
+    handleValidForm();
+  };
+  const handleValidForm = useCallback(( name, surname, number ) => {
     if (!name || !surname || !number) {
       return setisValid(false);
     }
     return setisValid(true);
   }, []);
 
-  const handleReset = useCallback(() => {
-    setName("");
-    setSurname("");
-    setNumber("");
-    setisValid(false)
-  }, []);
-
   const handleAddNewClient = (e) => {
     e.preventDefault();
     if (name && surname && number) {
       addClients({ name, surname, number });
-      handleReset()
+      handleReset();
       setVisible(false);
     }
   };
 
-  const handlChangeName = useCallback((e) => {
-    const name = e.target.value;
-    setName(name);
-    handleValidForm({ name, surname, number });
-  }, [handleValidForm, surname, number]);
+  const handlChangeName = useCallback(
+    (e) => {
+      const name = e.target.value;
+      setName(name);
+      handleValidForm( name, surname, number );
+    },
+    [handleValidForm, surname, number]
+  );
 
-  const handlChangeSurname = (e) => {
-    const surname = e.target.value;
-    setSurname(e.target.value);
-    handleValidForm({ name, surname, number });
-  };
+  const handlChangeSurname = useCallback(
+    (e) => {
+      const surname = e.target.value;
+      setSurname(e.target.value);
+      handleValidForm( name, surname, number );
+    },
+    [name, number, handleValidForm]
+  );
 
-  const handlChangeNumber = (e) => {
-    const number = e.target.value;
-    setNumber(number);
-    handleValidForm({ name, surname, number });
-  };
+  const handlChangeNumber = useCallback(
+    (e) => {
+      const number = e.target.value;
+      setNumber(number);
+      handleValidForm(name, surname, number );
+    },
+    [name, surname, handleValidForm]
+  );
+
   const handleCloseForm = () => {
-    handleReset()
-    setVisible(false)
-  }
+    handleReset();
+    setVisible(false);
+  };
   return (
     <div>
       <button onClick={() => setVisible(true)}>введите ваши даннные</button>
-      <Modal visible={visible} setVisible={setVisible}>
+      <Modal
+        visible={visible}
+        setVisible={setVisible}
+        handleResetForm={handleReset}
+      >
         <form
           style={{
             display: "flex",

@@ -14,6 +14,12 @@ const PostsApp = () => {
   const [modal, setModal] = useState(false);
   const [valid, setIsValid] = useState(false);
   const dispatch = useDispatch();
+  const handleReset = () => {
+    setName("");
+    setUsername("");
+    setEmail("");
+    handleValidForm();
+  };
 
   const handleValidForm = useCallback((name, username, email) => {
     if (!name || !username || !email) {
@@ -22,11 +28,6 @@ const PostsApp = () => {
     return setIsValid(true);
   }, []);
 
-  const handleReset = (e) => {
-    setName("");
-    setUsername("");
-    setEmail("");
-  };
   const handleCloseForm = () => {
     handleReset();
     setModal(false);
@@ -38,7 +39,7 @@ const PostsApp = () => {
     if ((name && username).trim().length) {
       dispatch(addUsersAx({ userData }));
     }
-    setIsValid(false)
+    setIsValid(false);
     handleReset();
     setModal(false);
   };
@@ -61,11 +62,14 @@ const PostsApp = () => {
     [handleValidForm, name, email]
   );
 
-  const handleChangeEmail = useCallback((e) => {
-    const email = e.target.value;
-    setEmail(email);
-    handleValidForm(name, username, email);
-  }, [handleValidForm, name, username]);
+  const handleChangeEmail = useCallback(
+    (e) => {
+      const email = e.target.value;
+      setEmail(email);
+      handleValidForm(name, username, email);
+    },
+    [handleValidForm, name, username]
+  );
   // сначала изменение отлавливаются в инпуте, изменяя состояние потом этот text уже в Task из функции Handle
   return (
     <div>
@@ -76,7 +80,11 @@ const PostsApp = () => {
       >
         <button onClick={() => setModal(true)}>Добавить пользователя</button>
       </div>
-      <Modal visible={modal} setVisible={setModal}>
+      <Modal
+        visible={modal}
+        setVisible={setModal}
+        handleResetForm={handleReset}
+      >
         <div className="FormApp">
           <form onSubmit={handleSubmit}>
             <p>введите имя</p>
