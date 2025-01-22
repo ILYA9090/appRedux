@@ -9,7 +9,7 @@ const AddEntities = () => {
   const [visible, setVisible] = useState(false);
   const [valid, setIsValid] = useState(false);
 
-  const handleValidButton = useCallback(({ name, surname }) => {
+  const handleValidButton = useCallback(( name, surname ) => {
     if (!name || !surname) {
       return setIsValid(false);
     }
@@ -18,11 +18,12 @@ const AddEntities = () => {
   const handleReset = () => {
     setName("");
     setSurname("");
-    setIsValid(false);
+    handleValidButton()
   };
   const closeModalWindow = () => {
-    handleReset();
     setVisible(false);
+    handleReset();
+    handleValidButton()
   };
   const handleAddEnt = async (e) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ const AddEntities = () => {
     (e) => {
       const name = e.target.value;
       setName(name);
-      handleValidButton({ name, surname });
+      handleValidButton( name, surname );
     },
     [handleValidButton, surname]
   );
@@ -46,7 +47,7 @@ const AddEntities = () => {
     (e) => {
       const surname = e.target.value;
       setSurname(e.target.value);
-      handleValidButton({ name, surname });
+      handleValidButton( name, surname );
     },
     [name, handleValidButton]
   );
@@ -54,7 +55,7 @@ const AddEntities = () => {
   return (
     <div>
       <button onClick={() => setVisible(true)}>add </button>
-      <Modal visible={visible} setVisible={setVisible}>
+      <Modal visible={visible} setVisible={setVisible} handleResetForm={handleReset}>
         <form onSubmit={handleAddEnt}>
           <input type="text" value={name} onChange={handlChangeName} />
           <input type="text" value={surname} onChange={handlChangeSurname} />
@@ -63,6 +64,7 @@ const AddEntities = () => {
           </button>
         </form>
         <button onClick={closeModalWindow}>close</button>
+        <button onClick={handleReset}>сбросить</button>
       </Modal>
     </div>
   );

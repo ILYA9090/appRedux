@@ -1,7 +1,7 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import tasksReducer from "./tasksSlice";
 import { apiApp } from "./apiApp";
-import { 
+/*import { 
   persistStore,
    persistReducer,
    FLUSH,
@@ -12,6 +12,7 @@ import {
   REGISTER,
    } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+*/
 
 const store = configureStore({
   reducer: {
