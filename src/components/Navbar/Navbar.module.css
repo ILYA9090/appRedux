@@ -10,3 +10,7 @@
   margin-left: auto;
   padding: auto;
   }
+.startPage {
+  display: flex;
+  justify-content: center;
+}

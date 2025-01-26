@@ -1,5 +1,5 @@
 button[disabled] {
-    background-color: red;
+    color: red;
 }
 .login {
     display: flex;

@@ -22,7 +22,7 @@ const Navbar = () => {
           <Link to="/entities">ent</Link>
         </div>
       </div>
-  ) : (<p></p>)
+  ) : (<h1 className={cl.startPage}>Добро пожаловать!</h1>)
 }
 
 export default Navbar

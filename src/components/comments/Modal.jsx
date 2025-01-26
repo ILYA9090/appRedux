@@ -1,6 +1,6 @@
 import React from "react";
 import cl from "./Modal.module.css";
-const Modal = ({ children, visible, setVisible, handleResetForm }) => {
+const Modal = ({children, visible, setVisible, handleResetForm}) => {
   const rootClasses = [cl.Modal];
   if (visible) {
     rootClasses.push(cl.active);
