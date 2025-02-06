@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import tasksReducer from "./tasksSlice";
-import { apiApp } from "./apiApp";
+import { configureStore } from '@reduxjs/toolkit';
+import tasksReducer from './tasksSlice';
+import { apiApp } from './apiApp';
 /*import { 
   persistStore,
    persistReducer,
@@ -17,17 +17,11 @@ import storage from 'redux-persist/lib/storage';
 const store = configureStore({
   reducer: {
     taskStore: tasksReducer,
-    [apiApp.reducerPath] : apiApp.reducer,
-    
+    [apiApp.reducerPath]: apiApp.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiApp.middleware),
- 
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiApp.middleware),
 });
 export default store;
-
-
-
 
 /*const rootReducer = combineReducers({taskStore: tasksReducer})
 

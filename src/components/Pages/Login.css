@@ -1,12 +1,11 @@
 button[disabled] {
-    color: red;
-    text-decoration: line-through;
+  color: red;
+  text-decoration: line-through;
 }
 .login {
-    display: flex;
-    justify-content: center;
-    
+  display: flex;
+  justify-content: center;
 }
 body {
-    font-family: 'Times New Roman', Times, serif
+  font-family: 'Times New Roman', Times, serif;
 }

@@ -1,13 +1,10 @@
-.formComments{
-    display: flex;
-    justify-content: center;
-    
+.formComments {
+  display: flex;
+  justify-content: center;
 }
 .commentsMap {
- display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-

@@ -9,8 +9,25 @@
 .navbar__Links {
   margin-left: auto;
   padding: auto;
+}
+
+@keyframes color-change {
+  0% {
+    color: blue;
   }
+
+  50% {
+    color: red;
+  }
+
+  100% {
+    color: blue;
+  }
+}
+
 .startPage {
+  font-size: 30px;
+  animation: color-change 3s infinite;
   display: flex;
   justify-content: center;
 }

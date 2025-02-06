@@ -1,14 +1,14 @@
-import React, { useCallback, useState } from "react";
-import Modal from "../comments/Modal";
-import UserContext from "../Context/context";
-import { useContext } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import schema from "./yup";
-import "./Login.css"
+import React, { useCallback, useState } from 'react';
+import Modal from '../comments/Modal';
+import UserContext from '../Context/context';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import schema from './yup';
+import './Login.css';
 const Login = () => {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
   const [user, setUser] = useState([]);
   const [modal, setModal] = useState(false);
   const { setAuthorization } = useContext(UserContext);
@@ -21,8 +21,8 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleResetForm = () => {
-    setLogin("");
-    setPassword("");
+    setLogin('');
+    setPassword('');
     handleValidForm();
   };
 
@@ -39,33 +39,31 @@ const Login = () => {
   }, []);
 
   const handleSubmitForm = () => {
-    
     if (password && login) {
       const newUser = { password, login, id: Math.random() };
       setUser([...user, newUser]);
       setAuthorization(true);
-      handleResetForm()
+      handleResetForm();
       setModal(false);
     }
   };
 
-
   const handleChangeLogin = useCallback(
-    (e) => {
+    e => {
       const login = e.target.value;
       setLogin(login);
       handleValidForm(login, password);
     },
-    [handleValidForm, password]
+    [handleValidForm, password],
   );
 
   const handleChangePassword = useCallback(
-    (e) => {
+    e => {
       const password = e.target.value;
       setPassword(password);
       handleValidForm(login, password);
     },
-    [handleValidForm, login]
+    [handleValidForm, login],
   );
 
   return (
@@ -74,9 +72,9 @@ const Login = () => {
       <Modal visible={modal} setVisible={setModal} handleResetForm={handleResetForm}>
         <form type="form" onSubmit={handleSubmit(handleSubmitForm)}>
           <p>login</p>
-        
+
           <input
-             {...register("login")}
+            {...register('login')}
             placeholder="login"
             type="login"
             value={login}
@@ -86,7 +84,7 @@ const Login = () => {
           <p>{errors.login?.message}</p>
           <p>password</p>
           <input
-            {...register("password")}
+            {...register('password')}
             placeholder="password"
             type="password"
             value={password}

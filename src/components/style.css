@@ -1,9 +1,8 @@
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 .header {
   position: sticky;
-
 }
 img {
   max-width: 100%;
@@ -18,14 +17,13 @@ img {
 }
 .postsItem {
   text-align: center;
-  top:0;
+  top: 0;
 }
 
 .list {
   border: 1px solid turquoise;
   margin: 10px;
   padding-left: 5px;
-  
 }
 .Clock {
   border: 0.5px solid yellowgreen;
@@ -33,7 +31,8 @@ img {
   position: fixed;
   top: 10px;
   left: 10px;
-  float: left;}
+  float: left;
+}
 .inputItem {
   text-align: center;
 }
@@ -41,7 +40,6 @@ img {
   justify-content: center;
 }
 .apiQuery {
-  
   text-align: center;
   justify-content: center;
 }
@@ -61,12 +59,11 @@ img {
 }
 .commentsList {
   display: flex;
-  
 }
-.comments{
-justify-content: center;
+.comments {
+  justify-content: center;
 }
-.FormApp{
+.FormApp {
   display: flex;
   justify-content: center;
 }

@@ -1,31 +1,31 @@
-import React, { useCallback } from "react";
-import { useAddEntitiesMutation } from "../../slices/apiApp";
-import { useState } from "react";
-import Modal from "../comments/Modal";
+import React, { useCallback } from 'react';
+import { useAddEntitiesMutation } from '../../slices/apiApp';
+import { useState } from 'react';
+import Modal from '../comments/Modal';
 const AddEntities = () => {
   const [addEntities] = useAddEntitiesMutation();
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [visible, setVisible] = useState(false);
   const [valid, setIsValid] = useState(false);
 
-  const handleValidButton = useCallback(( name, surname ) => {
+  const handleValidButton = useCallback((name, surname) => {
     if (!name || !surname) {
       return setIsValid(false);
     }
     return setIsValid(true);
   }, []);
   const handleReset = () => {
-    setName("");
-    setSurname("");
-    handleValidButton()
+    setName('');
+    setSurname('');
+    handleValidButton();
   };
   const closeModalWindow = () => {
     setVisible(false);
     handleReset();
-    handleValidButton()
+    handleValidButton();
   };
-  const handleAddEnt = async (e) => {
+  const handleAddEnt = async e => {
     e.preventDefault();
     if (name && surname) {
       await addEntities({ name, surname });
@@ -35,21 +35,21 @@ const AddEntities = () => {
   };
 
   const handlChangeName = useCallback(
-    (e) => {
+    e => {
       const name = e.target.value;
       setName(name);
-      handleValidButton( name, surname );
+      handleValidButton(name, surname);
     },
-    [handleValidButton, surname]
+    [handleValidButton, surname],
   );
 
   const handlChangeSurname = useCallback(
-    (e) => {
+    e => {
       const surname = e.target.value;
       setSurname(e.target.value);
-      handleValidButton( name, surname );
+      handleValidButton(name, surname);
     },
-    [name, handleValidButton]
+    [name, handleValidButton],
   );
 
   return (

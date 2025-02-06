@@ -1,43 +1,39 @@
-import { useNavigate, useParams } from "react-router-dom";
-import React from "react";
-import { useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { useState } from 'react';
 const PostsComment = () => {
   const [comments, setComment] = useState([]);
-  const [text, setText] = useState("");
-  const route = useNavigate()
+  const [text, setText] = useState('');
+  const route = useNavigate();
   const params = useParams();
   console.log(params);
-  const handleAddComment = (e) => {
+  const handleAddComment = e => {
     e.preventDefault();
     if (text) {
       const comment = { text, id: 1 + Math.random(102) };
       setComment([...comments, comment]);
-      setText("");
+      setText('');
     }
   };
-  const hanledeleteComments = (id) => {
-    setComment(comments.filter((com) => com.id !== id));
+  const hanledeleteComments = id => {
+    setComment(comments.filter(com => com.id !== id));
   };
 
   return (
     <div>
-      <h1>
-        Напишите комментарии к посту c id = {params.id}
-      </h1>
+      <h1>Напишите комментарии к посту c id = {params.id}</h1>
 
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button style={{marginLeft:"2px"}}onClick={handleAddComment}>добавить комментарий</button>
+      <input type="text" value={text} onChange={e => setText(e.target.value)} />
+      <button style={{ marginLeft: '2px' }} onClick={handleAddComment}>
+        добавить комментарий
+      </button>
 
       <div>
         <ul>
-          {comments.map((com) => (
+          {comments.map(com => (
             <li key={com.id}>
               {com.text}
-              <button style={{marginLeft:"2px"}} onClick={() => hanledeleteComments(com.id)}>
+              <button style={{ marginLeft: '2px' }} onClick={() => hanledeleteComments(com.id)}>
                 удалить комментарий
               </button>
             </li>
@@ -45,7 +41,7 @@ const PostsComment = () => {
         </ul>
       </div>
       <button onClick={() => setComment([])}>удалить все комментарии</button>
-      <button onClick={() => route("/postsJson")}>Вернуться назад!</button>
+      <button onClick={() => route('/postsJson')}>Вернуться назад!</button>
     </div>
   );
 };

@@ -25,43 +25,34 @@ const initialState = {
   export default tasksSlice.reducer;
 */
 
-import {
-  createSlice,
-  createEntityAdapter,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const fetchUsers = createAsyncThunk("users/fetchUsers", async (limit) => {
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async limit => {
   const response = await axios.get(
-    `https://jsonplaceholder.typicode.com/users?${limit && `_limit=${limit}`}`
+    `https://jsonplaceholder.typicode.com/users?${limit && `_limit=${limit}`}`,
   );
   return await response.data;
 });
 
-export const deleteUser = createAsyncThunk("users/deleteUser", 
-  async (id) => {
-    await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+export const deleteUser = createAsyncThunk('users/deleteUser', async id => {
+  await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
   return id;
 });
-export const addUsersAx = createAsyncThunk(
-  'users/addUsersAx',
-  async (userData) => {
+export const addUsersAx = createAsyncThunk('users/addUsersAx', async userData => {
   const responce = await axios.post('https://jsonplaceholder.typicode.com/users', userData);
-    return await responce.data;
-  }
-
-)
+  return await responce.data;
+});
 
 const tasksAdapter = createEntityAdapter();
 
 const initialState = tasksAdapter.getInitialState({
-  loadingStatus: "idle",
+  loadingStatus: 'idle',
   error: null,
 });
 
 const tasksSlice = createSlice({
-  name: "users",
+  name: 'users',
   initialState,
   reducers: {
     addTasks: tasksAdapter.addMany,
@@ -69,23 +60,23 @@ const tasksSlice = createSlice({
     reset: () => tasksAdapter.getInitialState(),
   },
 
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(fetchUsers.pending, (state) => {
-        state.loadingStatus = "loading";
+      .addCase(fetchUsers.pending, state => {
+        state.loadingStatus = 'loading';
         state.error = null;
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         tasksAdapter.addMany(state, action);
-        state.loadingStatus = "idle";
+        state.loadingStatus = 'idle';
         state.error = null;
       })
       .addCase(deleteUser.fulfilled, tasksAdapter.removeOne)
-      .addCase(addUsersAx.fulfilled, tasksAdapter.addMany)
+      .addCase(addUsersAx.fulfilled, tasksAdapter.addMany);
   },
 });
 
 export const { addTasks, removePost, reset } = tasksSlice.actions;
 export default tasksSlice.reducer;
 
-export const selectors = tasksAdapter.getSelectors((state) => state.taskStore);
+export const selectors = tasksAdapter.getSelectors(state => state.taskStore);

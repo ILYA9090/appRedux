@@ -1,25 +1,25 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectors, deleteUser, fetchUsers, reset } from "../slices/tasksSlice";
-import { useDispatch } from "react-redux";
-import "./style.css";
-import { useNavigate } from "react-router-dom";
-import SelectSort from "./SelectSort";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectors, deleteUser, fetchUsers, reset } from '../slices/tasksSlice';
+import { useDispatch } from 'react-redux';
+import './style.css';
+import { useNavigate } from 'react-router-dom';
+import SelectSort from './SelectSort';
 
 // этот компонент маппит (отображет) текущее состояние, которое я изменяю с попомщью диспатча в компоненте PostApp
 const Posts = () => {
   const [checkbox, setCheckbox] = useState(false);
   const [limit, setLimit] = useState('10');
-  const [count, setCount] = useState("");
-  const [sorted, setSorted] = useState("name");
-  const [searchValue, setSearchValue] = useState("");
+  const [count, setCount] = useState('');
+  const [sorted, setSorted] = useState('name');
+  const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
   const posts = useSelector(selectors.selectAll);
 
   const changeCheckbox = () => setCheckbox(!checkbox);
   const router = useNavigate();
-  const handleSelectPosts = async (e) => {
+  const handleSelectPosts = async e => {
     await setLimit(e.target.value);
   };
   /*
@@ -44,7 +44,7 @@ const Posts = () => {
 
   const sortedPosts = [...posts]
     .sort((a, b) => a[sorted].localeCompare(b[sorted]))
-    .filter((user) => user[sorted].includes(searchValue.toLowerCase()));
+    .filter(user => user[sorted].includes(searchValue.toLowerCase()));
 
   useEffect(() => {
     dispatch(fetchUsers(limit));
@@ -52,12 +52,8 @@ const Posts = () => {
 
   return (
     <div className="postsItem">
-      <input
-        type="text"
-        value={count}
-        onChange={(e) => setCount(e.target.value)}
-      />
-      <div style={{ cursor: "pointer" }}>
+      <input type="text" value={count} onChange={e => setCount(e.target.value)} />
+      <div style={{ cursor: 'pointer' }}>
         <select value={limit} onChange={handleSelectPosts}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -68,30 +64,26 @@ const Posts = () => {
       <SelectSort
         sorted={sorted}
         setSorted={setSorted}
-        defaultValueDisabled={""}
+        defaultValueDisabled={''}
         options={[
-          { value: "name", name: "по имени" },
-          { value: "username", name: "по фамилии" },
-          { value: "email", name: "по email" },
+          { value: 'name', name: 'по имени' },
+          { value: 'username', name: 'по фамилии' },
+          { value: 'email', name: 'по email' },
         ]}
       />
       <input
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={e => setSearchValue(e.target.value)}
         placeholder="поиск пользоваетелей"
       />
       {sortedPosts.length === 0 ? (
-        <h1 style={{ textAlign: "center" }}>пользователи не найдены!</h1>
+        <h1 style={{ textAlign: 'center' }}>пользователи не найдены!</h1>
       ) : (
         <ol>
-          {sortedPosts.map((post) => (
-            <div className="list">
-              <li key={post.id}>
-                <input
-                  id="check"
-                  type="checkbox"
-                  onClick={() => changeCheckbox()}
-                />
+          {sortedPosts.map(post => (
+            <div key={post.id} className="list">
+              <li>
+                <input id="check" type="checkbox" onClick={() => changeCheckbox()} />
 
                 <label for="check"></label>
                 <span>{post.name}</span>
@@ -100,11 +92,7 @@ const Posts = () => {
                 <button onClick={() => router(`/userAdress/${post.id}`)}>
                   отркыть пользователя
                 </button>
-                <button
-                  id="b"
-                  type="button"
-                  onClick={() => dispatch(deleteUser(post.id))}
-                >
+                <button id="b" type="button" onClick={() => dispatch(deleteUser(post.id))}>
                   delete
                 </button>
               </li>
