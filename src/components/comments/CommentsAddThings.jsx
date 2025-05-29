@@ -5,6 +5,7 @@ const CommentsAddThings = () => {
   const [text, setText] = useState('');
   const [count, setCount] = useState(0);
   const [num, setNum] = useState(0);
+  const [c, setC] = useState(0);
   const route = useNavigate();
   const params = useParams();
   const handleAddComThings = e => {
@@ -18,7 +19,7 @@ const CommentsAddThings = () => {
   const handleRemoveCom = id => {
     setComments(comments.filter(com => com.id !== id));
   };
-
+  const inc = () => setC(c + 1);
   const plus = () => {
     setCount(parseInt(count) + parseInt(num));
     setNum('');
@@ -40,6 +41,8 @@ const CommentsAddThings = () => {
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <h1>Комментарий под id {params.id}</h1>
+        {c}
+        <button onClick={inc}>плюсик</button>
       </div>
       <h1>добавить комментарий</h1>
       <form>

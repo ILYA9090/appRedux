@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SelectSort = ({ options, setSorted, sorted, defaultValueDisabled }) => {
   return (
@@ -16,5 +17,15 @@ const SelectSort = ({ options, setSorted, sorted, defaultValueDisabled }) => {
     </div>
   );
 };
-
+SelectSort.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  setSorted: PropTypes.func.isRequired,
+  sorted: PropTypes.string.isRequired,
+  defaultValueDisabled: PropTypes.string.isRequired,
+};
 export default SelectSort;

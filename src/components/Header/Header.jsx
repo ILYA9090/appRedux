@@ -2,11 +2,12 @@ import React from 'react';
 import InputForAddNewClients from './InputForAddNewClients';
 
 import { useState } from 'react';
-import cl from './Header.module.css';
+import * as cl from './Header.module.css';
 import ModalForDescription from './ModalForDescription';
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
+
   return (
     <div>
       <div>
@@ -26,6 +27,7 @@ const Header = () => {
               style={{ display: 'flex', justifyContent: 'center' }}
               href="https://github.com/ILYA9090"
               rel="noreferrer"
+              target="_blank"
             >
               ссылка на мой gitHub
             </a>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import cl from './Navbar.module.css';
+import * as cl from './Navbar.module.css';
 import UserContext from '../Context/context';
 const Navbar = () => {
   /*
@@ -9,10 +9,14 @@ const Navbar = () => {
     */
 
   const { authorization, setAuthorization } = useContext(UserContext);
+  const logout = () => {
+    setAuthorization(false);
+    localStorage.removeItem('auth');
+  };
   return authorization ? (
     <div className={cl.navbar}>
       <div className={cl.navbar__Links}>
-        <button onClick={() => setAuthorization(false)}>выйти</button>
+        <button onClick={logout}>выйти</button>
         <Link to="/header">header /</Link>
         <Link to="/postsApp">postsApp /</Link>
         <Link to="/albumsList">album /</Link>

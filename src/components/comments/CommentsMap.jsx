@@ -10,7 +10,7 @@ const CommentsMap = () => {
   const { data = [] } = useGetCommentsQuery(count);
   const [selectedCount, setSelectedCount] = useState('');
   const [remove] = useDeleteCommentsMutation();
-  const [sorted, setSorted] = useState('id');
+  const [sorted, setSorted] = useState('text');
   const [searchParams, setSearchParams] = useState('');
   const route = useNavigate();
 
@@ -28,7 +28,7 @@ const CommentsMap = () => {
 
   const sortedPosts = [...data]
     .sort((a, b) => a[sorted].localeCompare(b[sorted]))
-    .filter(post => post.text.includes(searchParams.toLowerCase()));
+    .filter(post => post[sorted].includes(searchParams.toLowerCase()));
 
   //const filandsortposts = sortedPosts.filter((post) => post.text.includes(searchParams))
 

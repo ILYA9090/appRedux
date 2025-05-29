@@ -14,7 +14,6 @@ const PostsJson = () => {
   const [addPosts] = useAddPostsMutation();
   const [remove] = useRemovePostsMutation();
   const [valid, setIsValid] = useState(false);
-
   const resetForm = () => {
     setTitle('');
     handleIsValidForm();

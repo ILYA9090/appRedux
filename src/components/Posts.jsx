@@ -85,7 +85,7 @@ const Posts = () => {
               <li>
                 <input id="check" type="checkbox" onClick={() => changeCheckbox()} />
 
-                <label for="check"></label>
+                <label htmlFor="check"></label>
                 <span>{post.name}</span>
                 <span>{post.username}</span>
                 <span>{post.email}</span>

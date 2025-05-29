@@ -28,7 +28,7 @@ const AddEntities = () => {
   const handleAddEnt = async e => {
     e.preventDefault();
     if (name && surname) {
-      await addEntities({ name, surname });
+      await addEntities({ name, surname, id: Math.random(Math.random('hello')) });
       handleReset();
       setVisible(false);
     }

@@ -9,8 +9,9 @@ const MyDescription = () => {
       </p>
       <a
         style={{ display: 'flex', justifyContent: 'center' }}
-        href="https://vk.com/ovchinikov98"
+        href="https://vk.com/ovchinikov00"
         target="blank"
+        rel="noreferrer"
       >
         ЭТО МОЙ МИНИ САЙТ ДЛЯ РАБОТЫ С REDUX TOOLKIT AND RTK QUERY
       </a>

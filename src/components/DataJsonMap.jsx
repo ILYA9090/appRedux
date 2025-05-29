@@ -4,11 +4,14 @@ import SelectSort from './SelectSort';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import InputForSorted from './InputForSorted';
+import { useUpdatePostsMutation } from '../slices/apiApp';
 
 const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
-  const [sorted, setSorted] = useState('id');
-  const [sortedCount, setSortedCount] = useState('');
+  const [sorted, setSorted] = useState('title');
+  const [sortedCount, setSortedCount] = useState('10');
   const [searchParams, setSearchParams] = useState('');
+  const [update] = useUpdatePostsMutation();
+
   /*хук useNavigate используется для того, что бы при нажатии 
   на кнопку меня перекидывало на другую страницу по 
   айдишнмку, эта логика написана в appRouter
@@ -21,7 +24,10 @@ const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
     setCount(e.target.value);
     setSortedCount('');
   };
-
+  const updatePosts = () => {
+    const title = prompt();
+    console.log(update({ title }));
+  };
   const router = useNavigate();
   return (
     <div>
@@ -45,6 +51,7 @@ const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
           <option value="2">2</option>
           <option value="3">3</option>
           <option value={sortedCount}>{sortedCount}</option>
+          <option value={[...posts].length}>{posts.length}</option>
         </select>
       </div>
       <InputForSorted searchParams={searchParams} setSearchParams={setSearchParams} />
@@ -57,6 +64,7 @@ const DataJsonMap = ({ data, handleDeletePosts, count, setCount }) => {
               <li className="dataJson">
                 {post.title}
                 <button onClick={() => router(`/postsComment/${post.id}`)}>open posts</button>
+                <button onClick={() => updatePosts(post.id)}>обновить пост</button>
                 <button type="button" onClick={() => handleDeletePosts(post.id)}>
                   delete
                 </button>

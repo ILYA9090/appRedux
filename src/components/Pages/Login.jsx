@@ -45,6 +45,7 @@ const Login = () => {
       setAuthorization(true);
       handleResetForm();
       setModal(false);
+      localStorage.setItem('auth', 'true');
     }
   };
 

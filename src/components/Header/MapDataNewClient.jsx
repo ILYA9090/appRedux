@@ -8,7 +8,9 @@ const MapDataNewClient = () => {
       <ul>
         {data.map(clients => (
           <li key={clients.id}>
-            name : {clients.name}, surname : {clients.surname}, number: {clients.number}
+            <p>
+              name : {clients.name}, surname : {clients.surname}, number: {clients.number}
+            </p>
           </li>
         ))}
       </ul>

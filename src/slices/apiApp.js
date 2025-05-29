@@ -96,6 +96,14 @@ export const apiApp = createApi({
       }),
       invalidatesTags: ['Posts'],
     }),
+    updatePosts: builder.mutation({
+      query: post => ({
+        url: `/posts/${post.id}`,
+        method: 'PUT',
+        body: post,
+      }),
+      invalidatesTags: ['Posts'],
+    }),
     removeAllPosts: builder.mutation({
       query: () => ({
         url: `/posts`,
@@ -122,4 +130,5 @@ export const {
   useGetEntitiesQuery,
   useAddEntitiesMutation,
   useDeleteEntitiesMutation,
+  useUpdatePostsMutation,
 } = apiApp;
