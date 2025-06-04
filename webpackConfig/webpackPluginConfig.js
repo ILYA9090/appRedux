@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 const path = require('path');
 module.exports = function webpackPluginConfig(isProduction) {
@@ -11,5 +13,6 @@ module.exports = function webpackPluginConfig(isProduction) {
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
+    // new BundleAnalyzerPlugin(),
   ];
 };

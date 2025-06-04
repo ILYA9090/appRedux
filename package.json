@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.25.4",
     "axios": "^1.7.7",
     "gzip-js": "^0.3.2",
     "json-server": "^1.0.0-beta.3",
@@ -25,6 +26,8 @@
   "scripts": {
     "start": "webpack serve --env development",
     "dev": "react-scripts start",
+    "build:mobile": "webpack --env production --env platform=mobile",
+    "build:deskstop": "webpack --env production --env platform=deskstop",
     "build:prod": "webpack --env production",
     "build:dev": "webpack --env development",
     "test": "react-scripts test",
@@ -49,12 +52,13 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.27.1",
+    "@babel/core": "^7.27.4",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@eslint/create-config": "^1.0.0",
     "@eslint/js": "^9.19.0",
+    "@svgr/webpack": "^8.1.0",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "eslint": "^8.57.1",
@@ -75,6 +79,7 @@
     "prettier": "^3.4.2",
     "style-loader": "^4.0.0",
     "webpack": "^5.99.9",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
   }

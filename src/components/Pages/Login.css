@@ -9,3 +9,6 @@ button[disabled] {
 body {
   font-family: 'Times New Roman', Times, serif;
 }
+input {
+  padding: 5px;
+}

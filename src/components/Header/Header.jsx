@@ -4,6 +4,7 @@ import InputForAddNewClients from './InputForAddNewClients';
 import { useState } from 'react';
 import * as cl from './Header.module.css';
 import ModalForDescription from './ModalForDescription';
+import { Button } from 'antd';
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
@@ -20,7 +21,7 @@ const Header = () => {
             />
           </section>
         </header>
-        <button onClick={() => setVisible(true)}>обо мне</button>
+        <Button onClick={() => setVisible(true)}>обо мне</Button>
         <ModalForDescription setVisible={setVisible} visible={visible}>
           <p>
             <a
@@ -36,7 +37,7 @@ const Header = () => {
             интересы: стритлифтинг, фитнеc, история, трейдинг, коллекционирование, автомбоили ну и
             конечно же любимый фронт энд
           </p>
-          <button onClick={() => setVisible(false)}>закрыть</button>
+          <Button onClick={() => setVisible(false)}>закрыть</Button>
         </ModalForDescription>
         <h1>если вы захотите что бы я с вами связался, то введите данные по кнопке ниже!</h1>
         <InputForAddNewClients />

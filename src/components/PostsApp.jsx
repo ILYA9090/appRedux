@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addUsersAx } from '../slices/tasksSlice';
 import './style.css';
 import MyDescription from './MyDescription';
+import { Button } from 'antd';
 import Modal from './comments/Modal';
 import Posts from './Posts';
 import Clock from './Clock';
@@ -76,7 +77,7 @@ const PostsApp = () => {
       <Clock />
       <MyDescription />
       <div style={{ display: 'flex', justifyContent: 'center', margin: '30px' }}>
-        <button onClick={() => setModal(true)}>Добавить пользователя</button>
+        <Button onClick={() => setModal(true)}>Добавить пользователя</Button>
       </div>
       <Modal visible={modal} setVisible={setModal} handleResetForm={handleReset}>
         <div className="FormApp">

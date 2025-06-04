@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import * as cl from './Navbar.module.css';
 import UserContext from '../Context/context';
+import Sun from '../assets/sun.svg';
+import { Button } from 'antd';
 const Navbar = () => {
   /*
     ЧТО БЫ ИЗБЕЖАТЬ ПЕРЕРЕНДЕРА СТРАНИЦЫ ПОСЛЕ КАЖДОГО КЛИКА ПО ССЫЛКЕ В НАВБАРЕ МЫ ИСПОЛЬЗУЕИМ 
@@ -16,7 +18,8 @@ const Navbar = () => {
   return authorization ? (
     <div className={cl.navbar}>
       <div className={cl.navbar__Links}>
-        <button onClick={logout}>выйти</button>
+        <Sun width={20} heigth={20} />
+        <Button onClick={logout}>выйти</Button>
         <Link to="/header">header /</Link>
         <Link to="/postsApp">postsApp /</Link>
         <Link to="/albumsList">album /</Link>

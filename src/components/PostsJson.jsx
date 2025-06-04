@@ -5,6 +5,7 @@ import React from 'react';
 import DataJsonMap from './DataJsonMap';
 import Modal from './comments/Modal';
 import Clock from './Clock';
+import Loader from './Pages/Loader';
 
 const PostsJson = () => {
   const [title, setTitle] = useState('');
@@ -51,7 +52,7 @@ const PostsJson = () => {
     await remove(id);
   };
 
-  if (isLoading) return <h1>Loading</h1>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="apiQuery">

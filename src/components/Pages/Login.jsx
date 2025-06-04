@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './yup';
 import './Login.css';
+import { Button } from 'antd';
+import { Input } from 'antd';
 const Login = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -69,7 +71,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <button onClick={() => setModal(true)}>Хотите войти?</button>
+      <Button onClick={() => setModal(true)}>Хотите войти?</Button>
       <Modal visible={modal} setVisible={setModal} handleResetForm={handleResetForm}>
         <form type="form" onSubmit={handleSubmit(handleSubmitForm)}>
           <p>login</p>
@@ -93,11 +95,11 @@ const Login = () => {
             required
           />
           <p>{errors.password?.message}</p>
-          <button disabled={!valid} type="submit">
+          <Button disabled={!valid} htmlType="submit">
             войти
-          </button>
-          <button onClick={handleResetForm}>сбросить</button>
-          <button onClick={handleCloseForm}>закрыть</button>
+          </Button>
+          <Button onClick={handleResetForm}>сбросить</Button>
+          <Button onClick={handleCloseForm}>закрыть</Button>
         </form>
       </Modal>
     </div>

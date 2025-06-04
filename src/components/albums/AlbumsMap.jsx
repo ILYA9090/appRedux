@@ -7,12 +7,13 @@ import InputForSorted from '../InputForSorted';
 import { useDeleteAlbumsMutation } from '../../slices/apiApp';
 import { useNavigate } from 'react-router-dom';
 import * as cl from './Albums.module.css';
+import Loader from '../Pages/Loader';
 const AlbumsMap = () => {
   const [count, setCount] = useState('');
   const [countValue, setCountValue] = useState('');
   const [sorted, setSorted] = useState('id');
   const [searchParams, setSearchParams] = useState('');
-  const { data = [] } = useGetAlbumsQuery(count);
+  const { data = [], isLoading } = useGetAlbumsQuery(count);
   const [remove] = useDeleteAlbumsMutation();
   // реализовать сортировку по title и по body, важно делать сортировку именно копируя массив через оператор spread...
   // [...data].sort((a,b)=> a.title.localeCompare(b.title))
@@ -40,8 +41,10 @@ const AlbumsMap = () => {
   }, [sorted, data, searchParams]);
 
   //const al = [...data].sort((a, b) => a[sorted].localeCompare(b[sorted])).filter((post)=> post.title.includes(searchParams.toLowerCase())); //[sorted] обращаюсь к ключи через скобки так как у меня он меняется динамически
-  let a = 50;
-  return (
+  if (isLoading) {
+    return <Loader />;
+  }
+  return al.length ? (
     <div>
       <span style={{ margin: '10px' }}>add and select</span>
       <input value={countValue} onChange={e => setCountValue(e.target.value)} placeholder="50max" />
@@ -76,6 +79,8 @@ const AlbumsMap = () => {
         </ol>
       </div>
     </div>
+  ) : (
+    <h1 style={{ marginLeft: '45%', marginTop: '140px' }}>ПУСТО!</h1>
   );
 };
 

@@ -4,5 +4,6 @@ module.exports = function webpackDevServerConfuguration() {
   return {
     port: 5000,
     open: true,
+    historyApiFallback: true,
   };
 };

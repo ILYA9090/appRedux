@@ -19,7 +19,7 @@ module.exports = (env = {}) => {
     resolve: {
       extensions: webpackResolveConfig(),
     },
-    devtool: !isProduction ? 'inline-source-map' : false,
+    devtool: !isProduction ? 'eval-cheap-module-source-map' : 'source-map',
     devServer: !isProduction ? webpackDevServerConfuguration() : undefined,
   };
 };

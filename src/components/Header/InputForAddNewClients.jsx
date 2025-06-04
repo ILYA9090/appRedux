@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useState } from 'react';
 import { useAddClientsMutation } from '../../slices/apiApp';
 import Modal from '../comments/Modal';
-
+import { Button } from 'antd';
 const InputForAddNewClients = () => {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState('');
@@ -66,7 +66,7 @@ const InputForAddNewClients = () => {
   };
   return (
     <div>
-      <button onClick={() => setVisible(true)}>введите ваши даннные</button>
+      <Button onClick={() => setVisible(true)}>введите ваши даннные</Button>
       <Modal visible={visible} setVisible={setVisible} handleResetForm={handleReset}>
         <form
           style={{
@@ -94,13 +94,13 @@ const InputForAddNewClients = () => {
             value={number}
             onChange={handlChangeNumber}
           />
-          <button disabled={!isValid} type="submit">
+          <Button disabled={!isValid} htmlType="submit">
             внести данные
-          </button>
+          </Button>
         </form>
         <div style={{ display: 'flex', width: '300px', flexDirection: 'row' }}>
-          <button onClick={handleCloseForm}>закрыть</button>
-          <button onClick={handleReset}>сбросить</button>
+          <Button onClick={handleCloseForm}>закрыть</Button>
+          <Button onClick={handleReset}>сбросить</Button>
         </div>
       </Modal>
     </div>

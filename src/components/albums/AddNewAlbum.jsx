@@ -1,16 +1,17 @@
-import React, { useCallback } from "react";
-import { useState } from "react";
-import { useAddAlbumsMutation } from "../../slices/apiApp";
-import Modal from "../comments/Modal";
+import React, { useCallback } from 'react';
+import { useState } from 'react';
+import { useAddAlbumsMutation } from '../../slices/apiApp';
+import Modal from '../comments/Modal';
+import { Button } from 'antd';
 const AddNewAlbum = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
   const [addAlbums] = useAddAlbumsMutation();
   const [visible, setVisible] = useState(false);
   const [valid, setIsValid] = useState(false);
   const resetAlbum = () => {
-    setTitle("");
-    setBody("");
+    setTitle('');
+    setBody('');
     handleSetIsValidButton();
   };
 
@@ -21,7 +22,7 @@ const AddNewAlbum = () => {
     return setIsValid(true);
   }, []);
 
-  const handeAddAlbums = async (e) => {
+  const handeAddAlbums = async e => {
     e.preventDefault();
     if (title && body) {
       await addAlbums({ title, body });
@@ -31,21 +32,21 @@ const AddNewAlbum = () => {
   };
 
   const handleChangeTitle = useCallback(
-    (e) => {
+    e => {
       const title = e.target.value;
       setTitle(title);
       handleSetIsValidButton(title, body);
     },
-    [handleSetIsValidButton, body]
+    [handleSetIsValidButton, body],
   );
 
   const handleChangeBodyForm = useCallback(
-    (e) => {
+    e => {
       const body = e.target.value;
       setBody(body);
       handleSetIsValidButton(title, body);
     },
-    [handleSetIsValidButton, title]
+    [handleSetIsValidButton, title],
   );
   const handleCloseForm = () => {
     resetAlbum();
@@ -53,33 +54,30 @@ const AddNewAlbum = () => {
   };
   return (
     <div>
-      <button onClick={() => setVisible(true)}>добавить новый альбом</button>
-      <Modal
-        visible={visible}
-        setVisible={setVisible}
-        handleResetForm={resetAlbum}
+      <Button
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '100px',
+          marginLeft: '43%',
+        }}
+        onClick={() => setVisible(true)}
       >
+        добавить новый альбом
+      </Button>
+      <Modal visible={visible} setVisible={setVisible} handleResetForm={resetAlbum}>
         <form
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
           }}
           type="form"
           onSubmit={handeAddAlbums}
         >
-          <input
-            placeholder="add title"
-            type="text"
-            value={title}
-            onChange={handleChangeTitle}
-          />
-          <input
-            placeholder="add body"
-            type="text"
-            value={body}
-            onChange={handleChangeBodyForm}
-          />
+          <input placeholder="add title" type="text" value={title} onChange={handleChangeTitle} />
+          <input placeholder="add body" type="text" value={body} onChange={handleChangeBodyForm} />
           <button disabled={!valid} type="submit">
             Добавить
           </button>

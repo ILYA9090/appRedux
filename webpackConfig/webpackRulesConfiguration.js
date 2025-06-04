@@ -32,7 +32,7 @@ module.exports = function webpackRulesConfiguration(isProduction) {
       ],
     },
     {
-      test: /\.(png|jpe?g|gif)$/i,
+      test: /\.(png|jpg|gif)$/i,
       use: [
         {
           loader: 'file-loader',
@@ -42,6 +42,11 @@ module.exports = function webpackRulesConfiguration(isProduction) {
           },
         },
       ],
+    },
+    {
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: [{ loader: '@svgr/webpack', options: { icon: true } }],
     },
   ];
 };
